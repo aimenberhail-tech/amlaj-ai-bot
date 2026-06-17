@@ -461,17 +461,18 @@ async function handleMessage(senderId, messageText) {
     ];
   }
 
-  if (isProblemMessage(msg)) {
-    session.problem = messageText;
-    session.stage = "persuasion";
+if (isProblemMessage(msg)) {
+  session.problem = messageText;
+  session.stage = "persuasion";
 
-    return [
-      `فهمتك ${sister} 🥰`,
-      "شوفي متتحيريش، نعطيك مجموعة اللبان الذكر العماني الأصلية كاملة",
-      "راهي تفيدك بإذن الله، حاجة إيفيكاس ومضمونة 😍",
-      "من الأسبوع الأول تبداي تشوفي نتيجة روعة إن شاء الله"
-    ];
-  }
+  return [
+    `أمممم فهمتك ${sister} 🥰`,
+    "شوفي أختي متتحيريش، نعطيك هاذ المجموعة الأصلية كاملة 😍",
+    "راهي تفيدك بزاف بإذن الله ❤️",
+    "حاجة إيفيكاس ومضمونة ✨",
+    "استعمال لمدة أسبوع وتبداي تشوفي نتيجة روعة إن شاء الله 😍"
+  ];
+}
 
   if (isOrderQuestion(msg)) {
     session.stage = "order";
