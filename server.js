@@ -8,6 +8,95 @@ app.use(express.json());
 const VERIFY_TOKEN = "amlaj_verify_token";
 const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
 const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
+const PRODUCT_PRICE = 250;
+
+const DELIVERY = {
+  "الجزائر": { price: 40, mode: "show" },
+  "العاصمة": { price: 40, mode: "show" },
+
+  "الشلف": { price: 50, mode: "show" },
+  "ام البواقي": { price: 50, mode: "show" },
+  "أم البواقي": { price: 50, mode: "show" },
+  "باتنة": { price: 50, mode: "show" },
+  "بجاية": { price: 50, mode: "show" },
+  "البليدة": { price: 50, mode: "show" },
+  "البويرة": { price: 50, mode: "show" },
+  "تلمسان": { price: 50, mode: "show" },
+  "تيارت": { price: 50, mode: "show" },
+  "تيزي وزو": { price: 50, mode: "show" },
+  "جيجل": { price: 50, mode: "show" },
+  "سطيف": { price: 50, mode: "show" },
+  "سعيدة": { price: 50, mode: "show" },
+  "سكيكدة": { price: 50, mode: "show" },
+  "سيدي بلعباس": { price: 50, mode: "show" },
+  "عنابة": { price: 50, mode: "show" },
+  "قالمة": { price: 50, mode: "show" },
+  "قسنطينة": { price: 50, mode: "show" },
+  "المدية": { price: 50, mode: "show" },
+  "مستغانم": { price: 50, mode: "show" },
+  "معسكر": { price: 50, mode: "show" },
+  "وهران": { price: 50, mode: "show" },
+  "برج بوعريريج": { price: 50, mode: "show" },
+  "بومرداس": { price: 50, mode: "show" },
+  "الطارف": { price: 50, mode: "show" },
+  "تيسمسيلت": { price: 50, mode: "show" },
+  "تيبازة": { price: 50, mode: "show" },
+  "ميلة": { price: 50, mode: "show" },
+  "عين الدفلى": { price: 50, mode: "show" },
+  "عين تموشنت": { price: 50, mode: "show" },
+  "غليزان": { price: 50, mode: "show" },
+
+  "سوق اهراس": { price: 60, mode: "total" },
+  "سوق أهراس": { price: 60, mode: "total" },
+
+  "الأغواط": { price: 70, mode: "total" },
+  "الاغواط": { price: 70, mode: "total" },
+  "بسكرة": { price: 70, mode: "total" },
+  "بشار": { price: 70, mode: "total" },
+  "تبسة": { price: 70, mode: "total" },
+  "الجلفة": { price: 70, mode: "total" },
+  "ورقلة": { price: 70, mode: "total" },
+  "البيض": { price: 70, mode: "total" },
+  "الوادي": { price: 70, mode: "total" },
+  "خنشلة": { price: 70, mode: "total" },
+  "النعامة": { price: 70, mode: "total" },
+  "غرداية": { price: 70, mode: "total" },
+  "أولاد جلال": { price: 70, mode: "total" },
+  "اولاد جلال": { price: 70, mode: "total" },
+  "بني عباس": { price: 70, mode: "total" },
+  "تقرت": { price: 70, mode: "total" },
+  "توقرت": { price: 70, mode: "total" },
+  "المغير": { price: 70, mode: "total" },
+  "المنيعة": { price: 70, mode: "total" },
+
+  "أدرار": { price: 100, mode: "total" },
+  "ادرار": { price: 100, mode: "total" },
+  "تيميمون": { price: 100, mode: "total" }
+};
+
+const NO_DELIVERY = [
+  "تمنراست",
+  "اليزي",
+  "إليزي",
+  "تندوف",
+  "عين صالح",
+  "عين قزام",
+  "جانت"
+];
+
+function findWilaya(text) {
+  for (const w of NO_DELIVERY) {
+    if (text.includes(w.toLowerCase())) return { name: w, unavailable: true };
+  }
+
+  for (const [name, data] of Object.entries(DELIVERY)) {
+    if (text.includes(name.toLowerCase())) {
+      return { name, ...data };
+    }
+  }
+
+  return null;
+}
 
 const sessions = new Map();
 
