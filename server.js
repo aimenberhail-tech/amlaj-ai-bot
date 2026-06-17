@@ -78,7 +78,27 @@ app.post("/webhook", async (req, res) => {
         for (const event of entry.messaging || []) {
           const senderId = event.sender?.id;
           const messageText = event.message?.text;
-
+if (
+  hasAny(msg, [
+    "صارحيني",
+    "فيه نتيجة",
+    "كاين نتيجة",
+    "مجرب",
+    "جربتوه",
+    "صح مجرب",
+    "مضمون",
+    "يخرج عليا",
+    "ما يخرجش",
+    "خايفة"
+  ])
+) {
+  return [
+    "نعم أختي راه مجرب ومضمون بإذن الله 🥰",
+    "رانا نخدمو بيه مدة طويلة والحمد لله",
+    "نتائج روعة ومضمونة بشهادة الزبائن تاعنا ❤️",
+    "بإذن الله رايحة تشكريه عليه بزاف حنونة 😍"
+  ];
+}
           if (senderId && messageText) {
             const replies = await handleMessage(senderId, messageText);
 
