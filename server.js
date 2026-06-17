@@ -32,9 +32,6 @@ const DELIVERY = {
 
   "الشلف": { price: 50, mode: "show" },
   "chlef": { price: 50, mode: "show" },
-  "ام البواقي": { price: 50, mode: "show" },
-  "أم البواقي": { price: 50, mode: "show" },
-  "oum el bouaghi": { price: 50, mode: "show" },
   "باتنة": { price: 50, mode: "show" },
   "batna": { price: 50, mode: "show" },
   "بجاية": { price: 50, mode: "show" },
@@ -43,96 +40,81 @@ const DELIVERY = {
   "blida": { price: 50, mode: "show" },
   "البويرة": { price: 50, mode: "show" },
   "bouira": { price: 50, mode: "show" },
-  "تلمسان": { price: 50, mode: "show" },
-  "tlemcen": { price: 50, mode: "show" },
-  "تيارت": { price: 50, mode: "show" },
-  "tiaret": { price: 50, mode: "show" },
   "تيزي وزو": { price: 50, mode: "show" },
   "tizi ouzou": { price: 50, mode: "show" },
-  "جيجل": { price: 50, mode: "show" },
-  "jijel": { price: 50, mode: "show" },
   "سطيف": { price: 50, mode: "show" },
   "setif": { price: 50, mode: "show" },
-  "سعيدة": { price: 50, mode: "show" },
-  "saida": { price: 50, mode: "show" },
-  "سكيكدة": { price: 50, mode: "show" },
-  "skikda": { price: 50, mode: "show" },
-  "سيدي بلعباس": { price: 50, mode: "show" },
-  "sidi bel abbes": { price: 50, mode: "show" },
-  "عنابة": { price: 50, mode: "show" },
-  "annaba": { price: 50, mode: "show" },
-  "قالمة": { price: 50, mode: "show" },
-  "guelma": { price: 50, mode: "show" },
+  "سط": { price: 50, mode: "show" },
+  "جيجل": { price: 50, mode: "show" },
+  "jijel": { price: 50, mode: "show" },
   "قسنطينة": { price: 50, mode: "show" },
   "constantine": { price: 50, mode: "show" },
-  "المدية": { price: 50, mode: "show" },
-  "medea": { price: 50, mode: "show" },
-  "مستغانم": { price: 50, mode: "show" },
-  "mostaganem": { price: 50, mode: "show" },
-  "معسكر": { price: 50, mode: "show" },
-  "mascara": { price: 50, mode: "show" },
   "وهران": { price: 50, mode: "show" },
   "oran": { price: 50, mode: "show" },
-  "برج بوعريريج": { price: 50, mode: "show" },
-  "bordj": { price: 50, mode: "show" },
-  "بومرداس": { price: 50, mode: "show" },
-  "boumerdes": { price: 50, mode: "show" },
-  "الطارف": { price: 50, mode: "show" },
-  "el tarf": { price: 50, mode: "show" },
-  "تيسمسيلت": { price: 50, mode: "show" },
-  "tissemsilt": { price: 50, mode: "show" },
+  "عنابة": { price: 50, mode: "show" },
+  "annaba": { price: 50, mode: "show" },
+  "مستغانم": { price: 50, mode: "show" },
+  "mostaganem": { price: 50, mode: "show" },
   "تيبازة": { price: 50, mode: "show" },
   "tipaza": { price: 50, mode: "show" },
+  "بومرداس": { price: 50, mode: "show" },
+  "boumerdes": { price: 50, mode: "show" },
+  "برج بوعريريج": { price: 50, mode: "show" },
+  "bordj": { price: 50, mode: "show" },
+  "المدية": { price: 50, mode: "show" },
+  "medea": { price: 50, mode: "show" },
+  "غليزان": { price: 50, mode: "show" },
+  "relizane": { price: 50, mode: "show" },
+  "معسكر": { price: 50, mode: "show" },
+  "mascara": { price: 50, mode: "show" },
   "ميلة": { price: 50, mode: "show" },
   "mila": { price: 50, mode: "show" },
+  "قالمة": { price: 50, mode: "show" },
+  "guelma": { price: 50, mode: "show" },
+  "سكيكدة": { price: 50, mode: "show" },
+  "skikda": { price: 50, mode: "show" },
+  "سعيدة": { price: 50, mode: "show" },
+  "saida": { price: 50, mode: "show" },
+  "تيارت": { price: 50, mode: "show" },
+  "tiaret": { price: 50, mode: "show" },
+  "تلمسان": { price: 50, mode: "show" },
+  "tlemcen": { price: 50, mode: "show" },
   "عين الدفلى": { price: 50, mode: "show" },
   "ain defla": { price: 50, mode: "show" },
   "عين تموشنت": { price: 50, mode: "show" },
   "ain temouchent": { price: 50, mode: "show" },
-  "غليزان": { price: 50, mode: "show" },
-  "relizane": { price: 50, mode: "show" },
 
   "سوق اهراس": { price: 60, mode: "total" },
-  "سوق أهراس": { price: 60, mode: "total" },
   "souk ahras": { price: 60, mode: "total" },
 
-  "الأغواط": { price: 70, mode: "total" },
-  "الاغواط": { price: 70, mode: "total" },
-  "laghouat": { price: 70, mode: "total" },
   "بسكرة": { price: 70, mode: "total" },
   "biskra": { price: 70, mode: "total" },
-  "بشار": { price: 70, mode: "total" },
-  "bechar": { price: 70, mode: "total" },
   "تبسة": { price: 70, mode: "total" },
   "tebessa": { price: 70, mode: "total" },
-  "الجلفة": { price: 70, mode: "total" },
-  "djelfa": { price: 70, mode: "total" },
-  "ورقلة": { price: 70, mode: "total" },
-  "ouargla": { price: 70, mode: "total" },
-  "البيض": { price: 70, mode: "total" },
-  "el bayadh": { price: 70, mode: "total" },
-  "الوادي": { price: 70, mode: "total" },
-  "el oued": { price: 70, mode: "total" },
   "خنشلة": { price: 70, mode: "total" },
   "khenchela": { price: 70, mode: "total" },
-  "النعامة": { price: 70, mode: "total" },
-  "naama": { price: 70, mode: "total" },
+  "ورقلة": { price: 70, mode: "total" },
+  "ouargla": { price: 70, mode: "total" },
+  "الجلفة": { price: 70, mode: "total" },
+  "djelfa": { price: 70, mode: "total" },
   "غرداية": { price: 70, mode: "total" },
   "ghardaia": { price: 70, mode: "total" },
-  "أولاد جلال": { price: 70, mode: "total" },
-  "اولاد جلال": { price: 70, mode: "total" },
-  "ouled djellal": { price: 70, mode: "total" },
-  "بني عباس": { price: 70, mode: "total" },
-  "beni abbes": { price: 70, mode: "total" },
-  "تقرت": { price: 70, mode: "total" },
   "توقرت": { price: 70, mode: "total" },
+  "تقرت": { price: 70, mode: "total" },
   "touggourt": { price: 70, mode: "total" },
   "المغير": { price: 70, mode: "total" },
   "el meghaier": { price: 70, mode: "total" },
   "المنيعة": { price: 70, mode: "total" },
   "el menia": { price: 70, mode: "total" },
+  "البيض": { price: 70, mode: "total" },
+  "el bayadh": { price: 70, mode: "total" },
+  "الوادي": { price: 70, mode: "total" },
+  "el oued": { price: 70, mode: "total" },
+  "بشار": { price: 70, mode: "total" },
+  "bechar": { price: 70, mode: "total" },
+  "الاغواط": { price: 70, mode: "total" },
+  "laghouat": { price: 70, mode: "total" },
 
-  "أدرار": { price: 100, mode: "total" },
   "ادرار": { price: 100, mode: "total" },
   "adrar": { price: 100, mode: "total" },
   "تيميمون": { price: 100, mode: "total" },
@@ -140,19 +122,12 @@ const DELIVERY = {
 };
 
 const NO_DELIVERY = [
-  "تمنراست",
-  "tamanrasset",
-  "اليزي",
-  "إليزي",
-  "illizi",
-  "تندوف",
-  "tindouf",
-  "عين صالح",
-  "in salah",
-  "عين قزام",
-  "in guezzam",
-  "جانت",
-  "djanet"
+  "تمنراست", "tamanrasset",
+  "اليزي", "illizi",
+  "تندوف", "tindouf",
+  "عين صالح", "in salah",
+  "عين قزام", "in guezzam",
+  "جانت", "djanet"
 ];
 
 const sessions = new Map();
@@ -163,7 +138,8 @@ function getSession(senderId) {
       product: "luban",
       problem: null,
       gender: "female",
-      stage: "start"
+      stage: "start",
+      lastTotal: null
     });
   }
   return sessions.get(senderId);
@@ -192,24 +168,37 @@ function hasAny(text, words) {
   return words.some((w) => t.includes(normalize(w)));
 }
 
-function splitMessages(text) {
-  return text.split("---").map((x) => x.trim()).filter(Boolean);
-}
-
 function wait(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+function splitMessages(text) {
+  return text.split("---").map((x) => x.trim()).filter(Boolean);
 }
 
 function getOfferEndDate() {
   const date = new Date();
   date.setDate(date.getDate() + 2);
-
   const months = [
     "جانفي", "فيفري", "مارس", "أفريل", "ماي", "جوان",
     "جويلية", "أوت", "سبتمبر", "أكتوبر", "نوفمبر", "ديسمبر"
   ];
-
   return `${date.getDate()} ${months[date.getMonth()]}`;
+}
+
+function getDeliveryEstimate() {
+  const days = ["الأحد", "الإثنين", "الثلاثاء", "الأربعاء", "الخميس", "الجمعة", "السبت"];
+  const today = new Date();
+  const first = new Date(today);
+  const second = new Date(today);
+
+  first.setDate(today.getDate() + 1);
+  second.setDate(today.getDate() + 2);
+
+  if (first.getDay() === 5) first.setDate(first.getDate() + 1);
+  if (second.getDay() === 5) second.setDate(second.getDate() + 1);
+
+  return `${days[first.getDay()]} ولا ${days[second.getDay()]}`;
 }
 
 function findWilaya(text) {
@@ -228,181 +217,98 @@ function findWilaya(text) {
 
 function isDeliveryQuestion(msg) {
   return hasAny(msg, [
-    "توصيل",
-    "التوصيل",
-    "توصلو",
-    "توصلولي",
-    "كاين توصيل",
-    "شحال التوصيل",
-    "livraison",
-    "delivery",
-    "a domicile",
-    "domicile",
-    "وصل",
-    "تبعثو"
+    "توصيل", "التوصيل", "توصلو", "توصلولي", "كاين توصيل",
+    "شحال التوصيل", "livraison", "delivery", "a domicile",
+    "domicile", "وصل", "تبعثو", "الشحن"
+  ]);
+}
+
+function isDeliveryTimeQuestion(msg) {
+  return hasAny(msg, [
+    "وقتاش تلحق", "وقتاش تلحقني", "وقتاش توصل", "وقتاش توصلني",
+    "وقتاش تجي", "كي نكوموندي اليوم", "اذا كومونديت اليوم",
+    "اذا طلبت اليوم", "شحال من نهار", "شحال من يوم",
+    "في قداش توصل", "في قداش تلحق", "قداش وتلحق",
+    "قداش وتوصل", "delai", "délai", "combien de jours",
+    "quand arrive", "quand livraison", "waktach", "waktech",
+    "twsel", "tosel", "telha9", "tlhak", "ki ncommandi lyom"
   ]);
 }
 
 function isPriceQuestion(msg) {
   return hasAny(msg, [
-    "السعر",
-    "سعر",
-    "بشحال",
-    "شحال",
-    "بكم",
-    "prix",
-    "price",
-    "bchhal",
-    "chhal"
+    "السعر", "سعر", "بشحال", "شحال", "بكم",
+    "prix", "price", "bchhal", "chhal"
   ]);
 }
 
 function isStartMessage(msg) {
   return hasAny(msg, [
-    "سلام",
-    "salam",
-    "slm",
-    "cc",
-    "bonjour",
-    "bonsoir",
-    "مهتم",
-    "interesse",
-    "interested",
-    "واش عندكم",
-    "الباك",
-    "باك",
-    "pack",
-    "le pack",
-    "المجموعه",
-    "المجموعة",
-    "produit",
-    "product",
-    "groupe",
-    "coffret",
-    "لبان",
-    "لبنان الدكر",
-    "لبنان الذكر",
-    "لبان الدكر",
-    "لبان الذكر",
-    "luban",
-    "louban",
-    "loubane"
+    "سلام", "salam", "slm", "cc", "bonjour", "bonsoir",
+    "مهتم", "interesse", "interested", "واش عندكم",
+    "الباك", "باك", "pack", "le pack", "المجموعه", "المجموعة",
+    "produit", "product", "groupe", "coffret", "لبان", "لبان الدكر",
+    "لبان الذكر", "لبنان الدكر", "لبنان الذكر", "luban", "louban", "loubane"
   ]);
 }
 
-function isOrderQuestion(msg) {
+function isProductWord(msg) {
   return hasAny(msg, [
-    "نكوموندي",
-    "نكوموند",
-    "نطلب",
-    "ندير الطلبية",
-    "نأكد",
-    "نشتري",
-    "نشري",
-    "كيفاش نكوموندي",
-    "كيفاه نكوموندي",
-    "كيفاش نطلب",
-    "كيفاه نطلب",
-    "كيفاش نشري",
-    "كيفاه نشري",
-    "طلب",
-    "الطلب",
-    "طلبية",
-    "الطلبية",
-    "حبيت نطلب",
-    "بغيت نطلب",
-    "نحوس نطلب",
-    "كيفاه ندير طلب",
-    "كيفاش ندير طلب",
-    "كيفاه ندير طلبية",
-    "كيفاش ندير طلبية",
-    "commande",
-    "commander",
-    "ncommandi",
-    "ncommondi",
-    "nchri",
-    "acheter"
-  ]);
-}
-
-function isUsageQuestion(msg) {
-  return hasAny(msg, [
-    "استعمال",
-    "نستعمل",
-    "نستعملها",
-    "كيفاش نستعمل",
-    "كيفاه نستعمل",
-    "كيفاش نديرها",
-    "كيفاه نديرها",
-    "نحطها",
-    "ندهنها",
-    "utilisation",
-    "utiliser",
-    "comment utiliser",
-    "mode d emploi"
+    "الباك", "باك", "pack", "le pack", "المجموعه", "المجموعة",
+    "produit", "product", "groupe", "coffret", "لبان", "لبان الدكر",
+    "لبان الذكر", "لبنان الدكر", "لبنان الذكر", "luban", "louban", "loubane"
   ]);
 }
 
 function isProblemMessage(msg) {
   return hasAny(msg, [
-    "تجاعيد",
-    "rides",
-    "wrinkles",
-    "هالات",
-    "cernes",
-    "تصبغات",
-    "taches",
-    "pigmentation",
-    "حبوب",
-    "boutons",
-    "acne",
-    "اثار",
-    "آثار",
-    "مسام",
-    "pores",
-    "كلف",
-    "melasma",
-    "خطوط",
-    "وجه",
-    "visage",
-    "بشرة",
-    "peau",
-    "شحوب"
+    "تجاعيد", "rides", "wrinkles", "هالات", "cernes",
+    "تصبغات", "taches", "pigmentation", "حبوب", "boutons",
+    "acne", "اثار", "آثار", "مسام", "pores", "كلف",
+    "melasma", "خطوط", "وجه", "visage", "بشرة", "peau", "شحوب"
+  ]);
+}
+
+function isOrderQuestion(msg) {
+  return hasAny(msg, [
+    "نكوموندي", "نكوموند", "نطلب", "ندير الطلبية", "نأكد",
+    "نشتري", "نشري", "طلب", "الطلب", "طلبية", "الطلبية",
+    "حبيت نطلب", "بغيت نطلب", "نحوس نطلب", "كيفاش نكوموندي",
+    "كيفاه نكوموندي", "كيفاش نطلب", "كيفاه نطلب", "كيفاش نشري",
+    "كيفاه نشري", "commande", "commander", "ncommandi",
+    "ncommondi", "nchri", "acheter"
+  ]);
+}
+
+function isUsageQuestion(msg) {
+  return hasAny(msg, [
+    "استعمال", "نستعمل", "نستعملها", "كيفاش نستعمل",
+    "كيفاه نستعمل", "كيفاش نديرها", "كيفاه نديرها",
+    "نحطها", "ندهنها", "utilisation", "utiliser",
+    "comment utiliser", "mode d emploi"
   ]);
 }
 
 function isTrustQuestion(msg) {
   return hasAny(msg, [
-    "يفيدني",
-    "يفيد",
-    "صح",
-    "مضمون",
-    "جربت",
-    "خايفة",
-    "مجرب",
-    "جربتوه",
-    "صارحيني",
-    "فيه نتيجة",
-    "كاين نتيجة",
-    "resultat",
-    "efficace",
-    "vrai",
-    "garantie"
+    "يفيدني", "يفيد", "صح", "مضمون", "جربت", "خايفة",
+    "مجرب", "جربتوه", "صارحيني", "فيه نتيجة", "كاين نتيجة",
+    "resultat", "efficace", "vrai", "garantie", "مليح", "مليحة"
   ]);
 }
 
 function isProductPhotoQuestion(msg) {
   return hasAny(msg, [
-    "صوريلي",
-    "صورة المنتج",
-    "نشوف المنتج",
-    "ابعثيلي صورة",
-    "ابعتيلي صورة",
-    "وريني المنتج",
-    "كيف جاية",
-    "كيفاه جاية",
-    "photo",
-    "image"
+    "صوريلي", "صورة المنتج", "نشوف المنتج", "ابعثيلي صورة",
+    "ابعتيلي صورة", "وريني المنتج", "كيف جاية", "كيفاه جاية",
+    "photo", "image"
+  ]);
+}
+
+function isTotalConfirmation(msg) {
+  return hasAny(msg, [
+    "يعني تجيني", "يعني يجي", "كلش", "مع التوصيل", "300", "320", "350",
+    "total", "tout", "koulch", "kolch", "يعني 300", "يعني 320"
   ]);
 }
 
@@ -439,7 +345,7 @@ app.post("/webhook", async (req, res) => {
 
             for (const reply of replies) {
               await sendMessage(senderId, reply);
-              await wait(900);
+              await wait(800);
             }
           }
         }
@@ -462,6 +368,13 @@ async function handleMessage(senderId, messageText) {
   const sister = session.gender === "male" ? "خويا" : "أختي";
   const honey = session.gender === "male" ? "خويا" : "حنونة";
 
+  if (isDeliveryTimeQuestion(msg)) {
+    return [
+      `إذا كومونديتي اليوم ${sister}، غالبًا طلبيتك تلحقك بين ${getDeliveryEstimate()} إن شاء الله 🚚🥰`,
+      "يعيطلك الليفرور ويجيبهالك لباب الدار ✅"
+    ];
+  }
+
   if (hasAny(msg, [
     "وين مقركم", "وين حالين", "نتوما منين", "منين نتوما",
     "وين راكم", "وين المحل", "وين كاينين", "from where"
@@ -479,14 +392,37 @@ async function handleMessage(senderId, messageText) {
     ];
   }
 
+  if (isProblemMessage(msg)) {
+    session.problem = messageText;
+    session.stage = "persuasion";
+
+    await sendMessage(senderId, `أمممم فهمتك ${sister} 🥰`);
+    await sendMessage(senderId, "شوفي أختي متتحيريش، نعطيك هاذ المجموعة الأصلية كاملة 😍");
+    await sendMessage(senderId, "راهي تفيدك بزاف بإذن الله ❤️");
+    await sendMessage(senderId, "حاجة إيفيكاس ومضمونة ✨");
+    await sendMessage(senderId, "استعمال لمدة أسبوع وتبداي تشوفي نتيجة روعة إن شاء الله 😍");
+
+    for (const image of TESTIMONIALS) {
+      await sendImage(senderId, image);
+      await wait(500);
+    }
+
+    return [
+      "نتائج روعة ومضمونة 🥰",
+      "ونزيدوك معاها ضمان لمدة شهر كامل بعد الاستعمال ❤️",
+      `يعني إذا ما خرجتش عليك النتيجة تقدري تتصلي بينا ونرجعولك دراهمك ${honey} 🌹`
+    ];
+  }
+
   const wilaya = findWilaya(msg);
 
-  if (wilaya && (isDeliveryQuestion(msg) || msg.length <= 30)) {
+  if (wilaya && (isDeliveryQuestion(msg) || msg.length <= 35)) {
     if (wilaya.unavailable) {
       return [`للأسف حاليًا ما عندناش توصيل لهذه الولاية ${sister} 😔`];
     }
 
     const total = PRODUCT_PRICE + wilaya.price;
+    session.lastTotal = total;
 
     if (wilaya.mode === "total") {
       return [
@@ -505,6 +441,14 @@ async function handleMessage(senderId, messageText) {
     return [`لأي ولاية التوصيل ${sister}؟ 😊`];
   }
 
+  if (isTotalConfirmation(msg)) {
+    return [
+      `نعم ${sister} 🥰`,
+      "هذا هو السعر مع التوصيل لباب الدار 🚚",
+      `للطلب خليلي الاسم ورقم الهاتف والولاية والبلدية ${sister} 😊`
+    ];
+  }
+
   if ((isStartMessage(msg) || isPriceQuestion(msg)) && session.stage === "start") {
     session.stage = "asked_problem";
     return [
@@ -514,73 +458,24 @@ async function handleMessage(senderId, messageText) {
   }
 
   if (isProductPhotoQuestion(msg)) {
-    await sendMessage(
-      senderId,
-      "هادي هي مجموعة اللبان الذكر العماني الأصلية أختي 🥰"
-    );
-
+    await sendMessage(senderId, `هادي هي مجموعة اللبان الذكر العماني الأصلية ${sister} 🥰`);
     await sendImage(senderId, PRODUCT_IMAGE);
-
     return [
       "فيها زيت + كريم + صابون هدية مجانية 🎁",
       "السعر 250 ألف فقط 🥰"
     ];
   }
 
-  if (hasAny(msg, ["واش فيها", "وش فيها", "فيها", "مكونات", "ماذا تحتوي", "وش تحتوي"])) {
-    await sendMessage(
-      senderId,
-      "مجموعة اللبان الذكر العماني فيها زيت + كريم + صابون هدية مجانية 🎁"
-    );
-
+  if (hasAny(msg, ["واش فيها", "وش فيها", "مكونات", "ماذا تحتوي", "وش تحتوي"])) {
+    await sendMessage(senderId, "مجموعة اللبان الذكر العماني فيها زيت + كريم + صابون هدية مجانية 🎁");
     await sendImage(senderId, PRODUCT_IMAGE);
-
-    return [
-      "السعر 250 ألف فقط 🥰"
-    ];
+    return ["السعر 250 ألف فقط 🥰"];
   }
 
   if (isPriceQuestion(msg)) {
     return [
       `السعر 250 ألف فقط ${sister} 🥰`,
       "والتوصيل حسب الولاية 🚚"
-    ];
-  }
-
-  if (isProblemMessage(msg)) {
-    session.problem = messageText;
-    session.stage = "persuasion";
-
-    await sendMessage(senderId, `أمممم فهمتك ${sister} 🥰`);
-    await wait(500);
-
-    await sendMessage(
-      senderId,
-      "شوفي أختي متتحيريش، نعطيك هاذ المجموعة الأصلية كاملة 😍"
-    );
-    await wait(500);
-
-    await sendMessage(senderId, "راهي تفيدك بزاف بإذن الله ❤️");
-    await wait(500);
-
-    await sendMessage(senderId, "حاجة إيفيكاس ومضمونة ✨");
-    await wait(500);
-
-    await sendMessage(
-      senderId,
-      "استعمال لمدة أسبوع وتبداي تشوفي نتيجة روعة إن شاء الله 😍"
-    );
-    await wait(700);
-
-    for (const image of TESTIMONIALS) {
-      await sendImage(senderId, image);
-      await wait(600);
-    }
-
-    return [
-      "نتائج روعة ومضمونة 🥰",
-      "ونزيدوك معاها ضمان لمدة شهر كامل بعد الاستعمال ❤️",
-      `يعني إذا ما خرجتش عليك النتيجة تقدري تتصلي بينا ونرجعولك دراهمك ${honey} 🌹`
     ];
   }
 
@@ -605,13 +500,21 @@ async function handleMessage(senderId, messageText) {
 
     for (const image of TESTIMONIALS) {
       await sendImage(senderId, image);
-      await wait(600);
+      await wait(500);
     }
 
     return [
       "نتائج روعة ومضمونة بشهادة الزبائن تاعنا ❤️",
       `بإذن الله رايحة تشكريه عليه بزاف ${honey} 😍`,
       "ونزيدوك معاها ضمان لمدة شهر كامل بعد الاستعمال ❤️"
+    ];
+  }
+
+  if (isProductWord(msg)) {
+    return [
+      "مجموعة اللبان الذكر العماني الأصلية فيها زيت + كريم + صابون هدية مجانية 🎁",
+      `السعر 250 ألف فقط ${sister} 🥰`,
+      `وش عندك ${honey}؟ تجاعيد؟ هالات؟ تصبغات؟ ولا آثار حبوب؟ 😊`
     ];
   }
 
@@ -660,16 +563,13 @@ async function generateReply(userMessage, session) {
 المنتج:
 مجموعة اللبان الذكر العماني الأصلية فيها زيت + كريم + صابون هدية مجانية.
 السعر 250 ألف فقط.
-لا تكتب 2500 دج ولا 1000 دج.
+لا تكتب 2500 دج ولا تخترع أسعار التوصيل.
 
 تستعمل للتجاعيد، الخطوط، التصبغات، آثار الحبوب، الهالات، المسام، شحوب البشرة، وترطيب الوجه.
 
 طريقة الاستعمال:
 الكريم 20 دقيقة، ثم الزيت 20 دقيقة، ثم النوم، والصباح تغسل بالصابون.
 الكريم يمكن استعماله صباحًا كمرطب.
-
-النتيجة:
-من الأسبوع الأول تبدا تشوف نتيجة روعة إن شاء الله.
 
 السياق الحالي:
 المشكلة: ${session.problem || "غير محددة"}
@@ -686,7 +586,7 @@ async function generateReply(userMessage, session) {
 - لا تعيد العرض إذا المحادثة متقدمة.
 - لا تخترع أسعار التوصيل أبدًا.
 - إذا سأل عن التوصيل ولم تعرف الولاية اسأله عن الولاية فقط.
-- إذا قال: نعم، ايه، صح، كيفاش، يفيدني، أكمل حسب السياق ولا ترجع للبداية.
+- إذا قالت الزبونة: يعني تجيني بكذا؟ أجب بنعم واختصر.
 - إذا لم تفهم، اسأل سؤالًا واحدًا فقط.
 - لا تكتب فقرات طويلة.
 - هدفك البيع وجمع الطلب.
