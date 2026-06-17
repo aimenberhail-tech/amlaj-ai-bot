@@ -146,7 +146,17 @@ const NO_DELIVERY = [
   "جانت",
   "djanet"
 ];
-
+const TESTIMONIALS = [
+  "https://raw.githubusercontent.com/aimenberhail-tech/amlaj-ai-bot/main/images/691841945_1397443288861054_3626479443604338387_n.jpg",
+  "https://raw.githubusercontent.com/aimenberhail-tech/amlaj-ai-bot/main/images/692785460_1735975807392570_8219480836668607453_n.jpg",
+  "https://raw.githubusercontent.com/aimenberhail-tech/amlaj-ai-bot/main/images/692934784_1284550690523632_1988814384120415675_n.jpg",
+  "https://raw.githubusercontent.com/aimenberhail-tech/amlaj-ai-bot/main/images/693461571_1339739484699260_7997622204193395293_n.jpg",
+  "https://raw.githubusercontent.com/aimenberhail-tech/amlaj-ai-bot/main/images/694703495_1447011860075227_3500788383516057813_n.jpg",
+  "https://raw.githubusercontent.com/aimenberhail-tech/amlaj-ai-bot/main/images/694812129_993479616711083_5826408852734996488_n.jpg",
+  "https://raw.githubusercontent.com/aimenberhail-tech/amlaj-ai-bot/main/images/696372487_2010436912887010_2192728010404173525_n.jpg"
+];
+const PRODUCT_IMAGE =
+"https://raw.githubusercontent.com/aimenberhail-tech/amlaj-ai-bot/main/images/722752378_857421810771610_3359621745035357339_n.jpg";
 const sessions = new Map();
 
 function getSession(senderId) {
@@ -508,7 +518,31 @@ if (isProblemMessage(msg)) {
       `بإذن الله رايحة تشكريه عليه بزاف ${honey} 😍`
     ];
   }
+if (
+  hasAny(msg, [
+    "صورة",
+    "صوريلي",
+    "نشوف المنتج",
+    "ابعثيلي صورة",
+    "صورة المنتج",
+    "وش فيها المجموعة",
+    "وريلي نشوفها",
+    "wech fiha",
+    "وش فيه الباك"
+  ])
+) {
 
+  await sendMessage(
+    senderId,
+    "مجموعة اللبان الذكر العماني فيها زيت + كريم + صابون هدية مجانية 🎁"
+  );
+
+  await sendImage(senderId, PRODUCT_IMAGE);
+
+  return [
+    "السعر 250 ألف فقط 🥰"
+  ];
+}
   if (hasAny(msg, ["واش فيها", "وش فيها", "فيها", "مكونات", "ماذا تحتوي", "وش تحتوي"])) {
     return [
       "مجموعة اللبان الذكر العماني فيها:",
@@ -600,7 +634,23 @@ async function generateReply(userMessage, session) {
 
   return response.choices[0].message.content;
 }
-
+async function sendImage(senderId, imageUrl) {
+  await axios.post(
+    `https://graph.facebook.com/v19.0/me/messages?access_token=${PAGE_ACCESS_TOKEN}`,
+    {
+      recipient: { id: senderId },
+      message: {
+        attachment: {
+          type: "image",
+          payload: {
+            url: imageUrl,
+            is_reusable: true
+          }
+        }
+      }
+    }
+  );
+}
 async function sendMessage(senderId, text) {
   await axios.post(
     `https://graph.facebook.com/v19.0/me/messages?access_token=${PAGE_ACCESS_TOKEN}`,
