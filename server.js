@@ -11,9 +11,18 @@ const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 
 const PRODUCT_PRICE = 250;
 
-// إذا كانت الصورة لا تُرسل، خلي الرابط فارغًا مؤقتًا ""
 const PRODUCT_IMAGE =
   "https://raw.githubusercontent.com/aimenberhail-tech/amlaj-ai-bot/main/images/722752378_857421810771610_3359621745035357339_n.jpg";
+
+const TESTIMONIALS = [
+  "https://raw.githubusercontent.com/aimenberhail-tech/amlaj-ai-bot/main/images/691841945_1397443288861054_3626479443604338387_n.jpg",
+  "https://raw.githubusercontent.com/aimenberhail-tech/amlaj-ai-bot/main/images/692785460_1735975807392570_8219480836668607453_n.jpg",
+  "https://raw.githubusercontent.com/aimenberhail-tech/amlaj-ai-bot/main/images/692934784_1284550690523632_1988814384120415675_n.jpg",
+  "https://raw.githubusercontent.com/aimenberhail-tech/amlaj-ai-bot/main/images/693461571_1339739484699260_7997622204193395293_n.jpg",
+  "https://raw.githubusercontent.com/aimenberhail-tech/amlaj-ai-bot/main/images/694703495_1447011860075227_3500788383516057813_n.jpg",
+  "https://raw.githubusercontent.com/aimenberhail-tech/amlaj-ai-bot/main/images/694812129_993479616711083_5826408852734996488_n.jpg",
+  "https://raw.githubusercontent.com/aimenberhail-tech/amlaj-ai-bot/main/images/696372487_2010436912887010_2192728010404173525_n.jpg"
+];
 
 const DELIVERY = {
   "الجزائر": { price: 40, mode: "show" },
@@ -44,7 +53,6 @@ const DELIVERY = {
   "jijel": { price: 50, mode: "show" },
   "سطيف": { price: 50, mode: "show" },
   "setif": { price: 50, mode: "show" },
-  "sétif": { price: 50, mode: "show" },
   "سعيدة": { price: 50, mode: "show" },
   "saida": { price: 50, mode: "show" },
   "سكيكدة": { price: 50, mode: "show" },
@@ -146,17 +154,7 @@ const NO_DELIVERY = [
   "جانت",
   "djanet"
 ];
-const TESTIMONIALS = [
-  "https://raw.githubusercontent.com/aimenberhail-tech/amlaj-ai-bot/main/images/691841945_1397443288861054_3626479443604338387_n.jpg",
-  "https://raw.githubusercontent.com/aimenberhail-tech/amlaj-ai-bot/main/images/692785460_1735975807392570_8219480836668607453_n.jpg",
-  "https://raw.githubusercontent.com/aimenberhail-tech/amlaj-ai-bot/main/images/692934784_1284550690523632_1988814384120415675_n.jpg",
-  "https://raw.githubusercontent.com/aimenberhail-tech/amlaj-ai-bot/main/images/693461571_1339739484699260_7997622204193395293_n.jpg",
-  "https://raw.githubusercontent.com/aimenberhail-tech/amlaj-ai-bot/main/images/694703495_1447011860075227_3500788383516057813_n.jpg",
-  "https://raw.githubusercontent.com/aimenberhail-tech/amlaj-ai-bot/main/images/694812129_993479616711083_5826408852734996488_n.jpg",
-  "https://raw.githubusercontent.com/aimenberhail-tech/amlaj-ai-bot/main/images/696372487_2010436912887010_2192728010404173525_n.jpg"
-];
-const PRODUCT_IMAGE =
-"https://raw.githubusercontent.com/aimenberhail-tech/amlaj-ai-bot/main/images/722752378_857421810771610_3359621745035357339_n.jpg";
+
 const sessions = new Map();
 
 function getSession(senderId) {
@@ -175,16 +173,23 @@ function normalize(text) {
   return (text || "")
     .toLowerCase()
     .trim()
+    .replace(/[إأآا]/g, "ا")
+    .replace(/[ة]/g, "ه")
+    .replace(/[ى]/g, "ي")
+    .replace(/[ذ]/g, "د")
     .replace(/[ù]/g, "")
-    .replace(/[éèê]/g, "e")
+    .replace(/[éèêë]/g, "e")
     .replace(/[àâ]/g, "a")
     .replace(/[îï]/g, "i")
     .replace(/[ô]/g, "o")
-    .replace(/[ç]/g, "c");
+    .replace(/[ç]/g, "c")
+    .replace(/[^\u0600-\u06FFa-z0-9\s]/g, " ")
+    .replace(/\s+/g, " ");
 }
 
 function hasAny(text, words) {
-  return words.some((w) => text.includes(w.toLowerCase()));
+  const t = normalize(text);
+  return words.some((w) => t.includes(normalize(w)));
 }
 
 function splitMessages(text) {
@@ -263,7 +268,25 @@ function isStartMessage(msg) {
     "مهتم",
     "interesse",
     "interested",
-    "واش عندكم"
+    "واش عندكم",
+    "الباك",
+    "باك",
+    "pack",
+    "le pack",
+    "المجموعه",
+    "المجموعة",
+    "produit",
+    "product",
+    "groupe",
+    "coffret",
+    "لبان",
+    "لبنان الدكر",
+    "لبنان الذكر",
+    "لبان الدكر",
+    "لبان الذكر",
+    "luban",
+    "louban",
+    "loubane"
   ]);
 }
 
@@ -282,12 +305,6 @@ function isOrderQuestion(msg) {
     "كيفاه نطلب",
     "كيفاش نشري",
     "كيفاه نشري",
-    "commande",
-    "commander",
-    "ncommandi",
-    "ncommondi",
-    "nchri",
-    "acheter",
     "طلب",
     "الطلب",
     "طلبية",
@@ -299,6 +316,12 @@ function isOrderQuestion(msg) {
     "كيفاش ندير طلب",
     "كيفاه ندير طلبية",
     "كيفاش ندير طلبية",
+    "commande",
+    "commander",
+    "ncommandi",
+    "ncommondi",
+    "nchri",
+    "acheter"
   ]);
 }
 
@@ -316,7 +339,7 @@ function isUsageQuestion(msg) {
     "utilisation",
     "utiliser",
     "comment utiliser",
-    "mode d'emploi"
+    "mode d emploi"
   ]);
 }
 
@@ -365,6 +388,21 @@ function isTrustQuestion(msg) {
     "efficace",
     "vrai",
     "garantie"
+  ]);
+}
+
+function isProductPhotoQuestion(msg) {
+  return hasAny(msg, [
+    "صوريلي",
+    "صورة المنتج",
+    "نشوف المنتج",
+    "ابعثيلي صورة",
+    "ابعتيلي صورة",
+    "وريني المنتج",
+    "كيف جاية",
+    "كيفاه جاية",
+    "photo",
+    "image"
   ]);
 }
 
@@ -475,6 +513,33 @@ async function handleMessage(senderId, messageText) {
     ];
   }
 
+  if (isProductPhotoQuestion(msg)) {
+    await sendMessage(
+      senderId,
+      "هادي هي مجموعة اللبان الذكر العماني الأصلية أختي 🥰"
+    );
+
+    await sendImage(senderId, PRODUCT_IMAGE);
+
+    return [
+      "فيها زيت + كريم + صابون هدية مجانية 🎁",
+      "السعر 250 ألف فقط 🥰"
+    ];
+  }
+
+  if (hasAny(msg, ["واش فيها", "وش فيها", "فيها", "مكونات", "ماذا تحتوي", "وش تحتوي"])) {
+    await sendMessage(
+      senderId,
+      "مجموعة اللبان الذكر العماني فيها زيت + كريم + صابون هدية مجانية 🎁"
+    );
+
+    await sendImage(senderId, PRODUCT_IMAGE);
+
+    return [
+      "السعر 250 ألف فقط 🥰"
+    ];
+  }
+
   if (isPriceQuestion(msg)) {
     return [
       `السعر 250 ألف فقط ${sister} 🥰`,
@@ -482,18 +547,42 @@ async function handleMessage(senderId, messageText) {
     ];
   }
 
-if (isProblemMessage(msg)) {
-  session.problem = messageText;
-  session.stage = "persuasion";
+  if (isProblemMessage(msg)) {
+    session.problem = messageText;
+    session.stage = "persuasion";
 
-  return [
-    `أمممم فهمتك ${sister} 🥰`,
-    "شوفي أختي متتحيريش، نعطيك هاذ المجموعة الأصلية كاملة 😍",
-    "راهي تفيدك بزاف بإذن الله ❤️",
-    "حاجة إيفيكاس ومضمونة ✨",
-    "استعمال لمدة أسبوع وتبداي تشوفي نتيجة روعة إن شاء الله 😍"
-  ];
-}
+    await sendMessage(senderId, `أمممم فهمتك ${sister} 🥰`);
+    await wait(500);
+
+    await sendMessage(
+      senderId,
+      "شوفي أختي متتحيريش، نعطيك هاذ المجموعة الأصلية كاملة 😍"
+    );
+    await wait(500);
+
+    await sendMessage(senderId, "راهي تفيدك بزاف بإذن الله ❤️");
+    await wait(500);
+
+    await sendMessage(senderId, "حاجة إيفيكاس ومضمونة ✨");
+    await wait(500);
+
+    await sendMessage(
+      senderId,
+      "استعمال لمدة أسبوع وتبداي تشوفي نتيجة روعة إن شاء الله 😍"
+    );
+    await wait(700);
+
+    for (const image of TESTIMONIALS) {
+      await sendImage(senderId, image);
+      await wait(600);
+    }
+
+    return [
+      "نتائج روعة ومضمونة 🥰",
+      "ونزيدوك معاها ضمان لمدة شهر كامل بعد الاستعمال ❤️",
+      `يعني إذا ما خرجتش عليك النتيجة تقدري تتصلي بينا ونرجعولك دراهمك ${honey} 🌹`
+    ];
+  }
 
   if (isOrderQuestion(msg)) {
     session.stage = "order";
@@ -511,43 +600,18 @@ if (isProblemMessage(msg)) {
   }
 
   if (isTrustQuestion(msg)) {
+    await sendMessage(senderId, `نعم ${sister} راه مجرب ومضمون بإذن الله 🥰`);
+    await sendMessage(senderId, "رانا نخدمو بيه مدة طويلة والحمد لله");
+
+    for (const image of TESTIMONIALS) {
+      await sendImage(senderId, image);
+      await wait(600);
+    }
+
     return [
-      `نعم ${sister} راه مجرب ومضمون بإذن الله 🥰`,
-      "رانا نخدمو بيه مدة طويلة والحمد لله",
       "نتائج روعة ومضمونة بشهادة الزبائن تاعنا ❤️",
-      `بإذن الله رايحة تشكريه عليه بزاف ${honey} 😍`
-    ];
-  }
-if (
-  hasAny(msg, [
-    "صورة",
-    "صوريلي",
-    "نشوف المنتج",
-    "ابعثيلي صورة",
-    "صورة المنتج",
-    "وش فيها المجموعة",
-    "وريلي نشوفها",
-    "wech fiha",
-    "وش فيه الباك"
-  ])
-) {
-
-  await sendMessage(
-    senderId,
-    "مجموعة اللبان الذكر العماني فيها زيت + كريم + صابون هدية مجانية 🎁"
-  );
-
-  await sendImage(senderId, PRODUCT_IMAGE);
-
-  return [
-    "السعر 250 ألف فقط 🥰"
-  ];
-}
-  if (hasAny(msg, ["واش فيها", "وش فيها", "فيها", "مكونات", "ماذا تحتوي", "وش تحتوي"])) {
-    return [
-      "مجموعة اللبان الذكر العماني فيها:",
-      "زيت اللبان الذكر + كريم + صابون هدية مجانية 🎁",
-      "السعر 250 ألف فقط 🥰"
+      `بإذن الله رايحة تشكريه عليه بزاف ${honey} 😍`,
+      "ونزيدوك معاها ضمان لمدة شهر كامل بعد الاستعمال ❤️"
     ];
   }
 
@@ -623,7 +687,7 @@ async function generateReply(userMessage, session) {
 - لا تخترع أسعار التوصيل أبدًا.
 - إذا سأل عن التوصيل ولم تعرف الولاية اسأله عن الولاية فقط.
 - إذا قال: نعم، ايه، صح، كيفاش، يفيدني، أكمل حسب السياق ولا ترجع للبداية.
-- إذا لم تفهم، اسأل سؤالا واحدا فقط.
+- إذا لم تفهم، اسأل سؤالًا واحدًا فقط.
 - لا تكتب فقرات طويلة.
 - هدفك البيع وجمع الطلب.
 `
@@ -634,23 +698,29 @@ async function generateReply(userMessage, session) {
 
   return response.choices[0].message.content;
 }
+
 async function sendImage(senderId, imageUrl) {
-  await axios.post(
-    `https://graph.facebook.com/v19.0/me/messages?access_token=${PAGE_ACCESS_TOKEN}`,
-    {
-      recipient: { id: senderId },
-      message: {
-        attachment: {
-          type: "image",
-          payload: {
-            url: imageUrl,
-            is_reusable: true
+  try {
+    await axios.post(
+      `https://graph.facebook.com/v19.0/me/messages?access_token=${PAGE_ACCESS_TOKEN}`,
+      {
+        recipient: { id: senderId },
+        message: {
+          attachment: {
+            type: "image",
+            payload: {
+              url: imageUrl,
+              is_reusable: true
+            }
           }
         }
       }
-    }
-  );
+    );
+  } catch (error) {
+    console.error("Image send error:", error.response?.data || error.message);
+  }
 }
+
 async function sendMessage(senderId, text) {
   await axios.post(
     `https://graph.facebook.com/v19.0/me/messages?access_token=${PAGE_ACCESS_TOKEN}`,
