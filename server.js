@@ -129,7 +129,19 @@ async function handleMessage(senderId, messageText) {
     ];
   }
 
-  if (hasAny(msg, ["كيفاش", "استعمال", "نستعمل", "نستعملها"])) {
+  if (hasAny(msg, if (
+  hasAny(msg, [
+    "نستعمل",
+    "استعمال",
+    "نستعملها",
+    "كيفاش نستعمل",
+    "كيفاه نستعمل",
+    "كيفاش نديرها",
+    "كيفاه نديرها",
+    "نحطها",
+    "ندهنها"
+  ])
+) {
     if (session.product === "amlaj") {
       return [
         "تديري البخاخ في شعرك وتخليه ساعة 😊",
