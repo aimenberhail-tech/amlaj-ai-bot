@@ -195,7 +195,16 @@ async function handleMessage(senderId, messageText) {
 
   const sister = session.gender === "male" ? "خويا" : "أختي";
   const honey = session.gender === "male" ? "خويا" : "حنونة";
-
+  if (
+    hasAny(msg, [
+      "وين مقركم",
+      "وين حالين",
+      "نتوما منين",
+      ...
+    ])
+  ) {
+     ...
+  }
   if (
     hasAny(msg, [
       "سلام",
