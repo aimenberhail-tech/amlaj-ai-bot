@@ -277,7 +277,7 @@ function isOrderQuestion(msg) {
     "ncommandi",
     "ncommondi",
     "nchri",
-    "acheter"
+    "acheter",
     "طلب",
     "الطلب",
     "طلبية",
