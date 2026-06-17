@@ -353,7 +353,31 @@ if (
   if (hasAny(msg, ["نرجعلك", "نشوف", "نبحثك"])) {
     return ["مرحبا بيك في أي وقت حنونة 🥰"];
   }
+const wilaya = findWilaya(msg);
 
+if (wilaya) {
+
+  if (wilaya.unavailable) {
+    return [
+      "للأسف حاليًا ما عندناش توصيل لهذه الولاية أختي 😔"
+    ];
+  }
+
+  const total = PRODUCT_PRICE + wilaya.price;
+
+  if (wilaya.mode === "total") {
+    return [
+      "خيار الناس 🥰",
+      `السعر الإجمالي مع التوصيل لباب الدار ${total} ألف 🚚`
+    ];
+  }
+
+  return [
+    "خيار الناس 🥰",
+    `التوصيل ${wilaya.price} ألف لباب الدار 🚚`,
+    "معندناش للمكتب أختي 😊"
+  ];
+}
   const aiReply = await generateReply(messageText, session);
   return splitMessages(aiReply);
 }
