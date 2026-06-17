@@ -18,6 +18,7 @@ function getSession(senderId) {
       problem: null,
       gender: "female",
       stage: "start"
+      lastQuestion: null
     });
   }
   return sessions.get(senderId);
@@ -258,6 +259,7 @@ async function generateReply(userMessage, session) {
 قواعد الرد:
 - اعتبري الزبون امرأة إلا إذا قال أنه رجل.
 - لا تكتبي فقرات طويلة.
+- إذا ردت الزبونة بكلمة نعم/إيه/اي، لا تبدئي محادثة جديدة. أكملي على آخر سؤال مطروح حسب سياق المنتج والمرحلة.
 - لا تقولي أنك بوت.
 - إذا قال يفيدني؟ جاوبي حسب المنتج الحالي ولا ترجعي للبداية.
 - إذا قال كيفاش؟ غالبًا يقصد طريقة الاستعمال حسب المنتج الحالي.
