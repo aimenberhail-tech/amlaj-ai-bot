@@ -128,7 +128,8 @@ async function handleMessage(senderId, messageText) {
       "من الأسبوع الأول تبداي تشوفي نتيجة روعة إن شاء الله"
     ];
   }
-if (
+
+  if (
   hasAny(msg, [
     "نكوموندي",
     "نطلب",
@@ -147,7 +148,6 @@ if (
   session.stage = "order";
   return ["للطلب خليلي الاسم ورقم الهاتف والولاية والبلدية أختي 😊"];
 }
-  
   if (hasAny(msg, if (
   hasAny(msg, [
     "نستعمل",
