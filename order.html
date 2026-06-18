@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>تأكيد الطلب</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #111;
+      color: #fff;
+      padding: 20px;
+    }
+    .box {
+      max-width: 420px;
+      margin: auto;
+      background: #1b1b1b;
+      border: 1px solid #d4af37;
+      border-radius: 18px;
+      padding: 20px;
+    }
+    h2 {
+      color: #d4af37;
+      text-align: center;
+      margin-bottom: 10px;
+    }
+    .price {
+      text-align: center;
+      background: #d4af37;
+      color: #111;
+      font-weight: bold;
+      padding: 12px;
+      border-radius: 12px;
+      margin-bottom: 18px;
+    }
+    label {
+      display: block;
+      margin-top: 12px;
+      margin-bottom: 6px;
+      color: #f5d76e;
+    }
+    input, select {
+      width: 100%;
+      padding: 13px;
+      border-radius: 10px;
+      border: none;
+      font-size: 16px;
+      box-sizing: border-box;
+    }
+    .total {
+      margin-top: 18px;
+      padding: 14px;
+      background: #222;
+      border: 1px solid #d4af37;
+      border-radius: 12px;
+      text-align: center;
+      font-size: 18px;
+      font-weight: bold;
+    }
+    button {
+      margin-top: 18px;
+      width: 100%;
+      padding: 15px;
+      background: #d4af37;
+      color: #111;
+      border: none;
+      border-radius: 12px;
+      font-size: 18px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .success {
+      display: none;
+      text-align: center;
+      color: #7CFC00;
+      margin-top: 18px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+<div class="box">
+  <h2>تأكيد الطلب 🛒</h2>
+
+  <div class="price">
+    مجموعة اللبان الذكر العماني الأصلية<br>
+    السعر: 250 ألف فقط
+  </div>
+
+  <label>الاسم</label>
+  <input id="name" type="text" placeholder="اكتبي اسمك" required>
+
+  <label>رقم الهاتف</label>
+  <input id="phone" type="tel" placeholder="05xxxxxxxx" required>
+
+  <label>الولاية</label>
+  <select id="wilaya" onchange="updateTotal()" required>
+    <option value="">اختاري الولاية</option>
+  </select>
+
+  <label>البلدية</label>
+  <input id="commune" type="text" placeholder="اكتبي البلدية" required>
+
+  <div class="total" id="totalBox">
+    اختاري الولاية لظهور السعر النهائي
+  </div>
+
+  <button onclick="submitOrder()">✅ تأكيد الطلب</button>
+
+  <div class="success" id="successMsg">
+    ✅ تم استلام طلبك بنجاح حنونة، سيتصل بك فريقنا لتأكيد الطلب 🥰
+  </div>
+</div>
+
+<script>
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyLpWhYdH9w8WV4xg2CmWGmpriYkkw1EKwt6Y7b1Wm0kt3IcZwr9Wy-aKZ9etlJuORd/exec";
+
+const PRODUCT_PRICE = 2500;
+
+const wilayas = [
+  "الجزائر", "الشلف", "الأغواط", "أم البواقي", "باتنة", "بجاية", "بسكرة", "بشار",
+  "البليدة", "البويرة", "تمنراست", "تبسة", "تلمسان", "تيارت", "تيزي وزو",
+  "الجلفة", "جيجل", "سطيف", "سعيدة", "سكيكدة", "سيدي بلعباس", "عنابة",
+  "قالمة", "قسنطينة", "المدية", "مستغانم", "المسيلة", "معسكر", "ورقلة",
+  "وهران", "البيض", "إليزي", "برج بوعريريج", "بومرداس", "الطارف", "تندوف",
+  "تيسمسيلت", "الوادي", "خنشلة", "سوق أهراس", "تيبازة", "ميلة", "عين الدفلى",
+  "النعامة", "عين تموشنت", "غرداية", "غليزان", "تيميمون", "برج باجي مختار",
+  "أولاد جلال", "بني عباس", "عين صالح", "عين قزام", "تقرت", "جانت",
+  "المغير", "المنيعة"
+];
+
+const south = [
+  "الأغواط", "بسكرة", "بشار", "الجلفة", "ورقلة", "البيض", "الوادي",
+  "خنشلة", "تبسة", "النعامة", "غرداية", "أولاد جلال", "بني عباس",
+  "تقرت", "المغير", "المنيعة"
+];
+
+const farSouth = [
+  "تمنراست", "إليزي", "تندوف", "تيميمون", "برج باجي مختار",
+  "عين صالح", "عين قزام", "جانت"
+];
+
+const select = document.getElementById("wilaya");
+
+wilayas.forEach(w => {
+  const option = document.createElement("option");
+  option.value = w;
+  option.textContent = w;
+  select.appendChild(option);
+});
+
+function getDelivery(wilaya) {
+  if (wilaya === "الجزائر") return 400;
+  if (farSouth.includes(wilaya)) return 900;
+  if (south.includes(wilaya)) return 700;
+  return 500;
+}
+
+function updateTotal() {
+  const wilaya = document.getElementById("wilaya").value;
+  const box = document.getElementById("totalBox");
+
+  if (!wilaya) {
+    box.textContent = "اختاري الولاية لظهور السعر النهائي";
+    return;
+  }
+
+  const delivery = getDelivery(wilaya);
+  const total = PRODUCT_PRICE + delivery;
+
+  box.textContent = `التوصيل لباب المنزل: ${delivery} دج | المجموع: ${total} دج`;
+}
+
+function submitOrder() {
+  const name = document.getElementById("name").value.trim();
+  const phone = document.getElementById("phone").value.trim();
+  const wilaya = document.getElementById("wilaya").value;
+  const commune = document.getElementById("commune").value.trim();
+
+  if (!name || !phone || !wilaya || !commune) {
+    alert("كملي المعلومات حنونة 🥰");
+    return;
+  }
+
+  const delivery = getDelivery(wilaya);
+  const total = PRODUCT_PRICE + delivery;
+
+  const data = {
+    name,
+    phone,
+    wilaya,
+    commune,
+    delivery,
+    total
+  };
+
+  fetch(SCRIPT_URL, {
+    method: "POST",
+    mode: "no-cors",
+    headers: {
+      "Content-Type": "text/plain"
+    },
+    body: JSON.stringify(data)
+  });
+
+  document.getElementById("successMsg").style.display = "block";
+}
+</script>
+
+</body>
+</html>
