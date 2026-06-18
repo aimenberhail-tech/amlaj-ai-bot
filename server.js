@@ -310,6 +310,13 @@ async function handleMessage(senderId, messageText, payload) {
   const msg = normalize(messageText);
   const sister = session.gender === "male" ? "خويا" : "أختي";
   const honey = session.gender === "male" ? "خويا" : "حنونة";
+  if (msg === "test") {
+  await sendQuickReplies(senderId, "اختبار الأزرار 👇", [
+    { title: "السعر", payload: "MENU_PRICE" },
+    { title: "التوصيل", payload: "MENU_DELIVERY" }
+  ]);
+  return;
+}
 
   if (hasAny(msg, ["انا رجل", "راني رجل", "انا راجل", "راني راجل"])) {
     session.gender = "male";
