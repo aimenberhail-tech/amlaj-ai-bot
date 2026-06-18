@@ -1,13 +1,11 @@
 import express from "express";
 import axios from "axios";
-import OpenAI from "openai";
 
 const app = express();
 app.use(express.json());
 
 const VERIFY_TOKEN = "amlaj_verify_token";
 const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
-const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 
 const PRODUCT_PRICE = 250;
 
@@ -28,61 +26,37 @@ const DELIVERY = {
   "الجزائر": { price: 40, mode: "show" },
   "العاصمة": { price: 40, mode: "show" },
   "alger": { price: 40, mode: "show" },
-  "algiers": { price: 40, mode: "show" },
 
-  "الشلف": { price: 50, mode: "show" },
-  "chlef": { price: 50, mode: "show" },
-  "باتنة": { price: 50, mode: "show" },
-  "batna": { price: 50, mode: "show" },
+  "سطيف": { price: 50, mode: "show" },
+  "setif": { price: 50, mode: "show" },
+  "وهران": { price: 50, mode: "show" },
+  "oran": { price: 50, mode: "show" },
   "بجاية": { price: 50, mode: "show" },
   "bejaia": { price: 50, mode: "show" },
   "البليدة": { price: 50, mode: "show" },
   "blida": { price: 50, mode: "show" },
-  "البويرة": { price: 50, mode: "show" },
-  "bouira": { price: 50, mode: "show" },
-  "تيزي وزو": { price: 50, mode: "show" },
-  "tizi ouzou": { price: 50, mode: "show" },
-  "سطيف": { price: 50, mode: "show" },
-  "setif": { price: 50, mode: "show" },
-  "سط": { price: 50, mode: "show" },
-  "جيجل": { price: 50, mode: "show" },
-  "jijel": { price: 50, mode: "show" },
-  "قسنطينة": { price: 50, mode: "show" },
-  "constantine": { price: 50, mode: "show" },
-  "وهران": { price: 50, mode: "show" },
-  "oran": { price: 50, mode: "show" },
   "عنابة": { price: 50, mode: "show" },
   "annaba": { price: 50, mode: "show" },
-  "مستغانم": { price: 50, mode: "show" },
-  "mostaganem": { price: 50, mode: "show" },
-  "تيبازة": { price: 50, mode: "show" },
-  "tipaza": { price: 50, mode: "show" },
+  "قسنطينة": { price: 50, mode: "show" },
+  "constantine": { price: 50, mode: "show" },
+  "باتنة": { price: 50, mode: "show" },
+  "batna": { price: 50, mode: "show" },
+  "جيجل": { price: 50, mode: "show" },
+  "jijel": { price: 50, mode: "show" },
   "بومرداس": { price: 50, mode: "show" },
   "boumerdes": { price: 50, mode: "show" },
-  "برج بوعريريج": { price: 50, mode: "show" },
-  "bordj": { price: 50, mode: "show" },
-  "المدية": { price: 50, mode: "show" },
-  "medea": { price: 50, mode: "show" },
-  "غليزان": { price: 50, mode: "show" },
-  "relizane": { price: 50, mode: "show" },
-  "معسكر": { price: 50, mode: "show" },
-  "mascara": { price: 50, mode: "show" },
-  "ميلة": { price: 50, mode: "show" },
-  "mila": { price: 50, mode: "show" },
-  "قالمة": { price: 50, mode: "show" },
-  "guelma": { price: 50, mode: "show" },
-  "سكيكدة": { price: 50, mode: "show" },
-  "skikda": { price: 50, mode: "show" },
-  "سعيدة": { price: 50, mode: "show" },
-  "saida": { price: 50, mode: "show" },
-  "تيارت": { price: 50, mode: "show" },
-  "tiaret": { price: 50, mode: "show" },
+  "مستغانم": { price: 50, mode: "show" },
+  "mostaganem": { price: 50, mode: "show" },
   "تلمسان": { price: 50, mode: "show" },
   "tlemcen": { price: 50, mode: "show" },
-  "عين الدفلى": { price: 50, mode: "show" },
-  "ain defla": { price: 50, mode: "show" },
-  "عين تموشنت": { price: 50, mode: "show" },
-  "ain temouchent": { price: 50, mode: "show" },
+  "تيبازة": { price: 50, mode: "show" },
+  "tipaza": { price: 50, mode: "show" },
+  "الشلف": { price: 50, mode: "show" },
+  "chlef": { price: 50, mode: "show" },
+  "تيزي وزو": { price: 50, mode: "show" },
+  "tizi ouzou": { price: 50, mode: "show" },
+  "المدية": { price: 50, mode: "show" },
+  "medea": { price: 50, mode: "show" },
 
   "سوق اهراس": { price: 60, mode: "total" },
   "souk ahras": { price: 60, mode: "total" },
@@ -95,25 +69,16 @@ const DELIVERY = {
   "khenchela": { price: 70, mode: "total" },
   "ورقلة": { price: 70, mode: "total" },
   "ouargla": { price: 70, mode: "total" },
-  "الجلفة": { price: 70, mode: "total" },
-  "djelfa": { price: 70, mode: "total" },
   "غرداية": { price: 70, mode: "total" },
   "ghardaia": { price: 70, mode: "total" },
+  "الجلفة": { price: 70, mode: "total" },
+  "djelfa": { price: 70, mode: "total" },
   "توقرت": { price: 70, mode: "total" },
-  "تقرت": { price: 70, mode: "total" },
   "touggourt": { price: 70, mode: "total" },
-  "المغير": { price: 70, mode: "total" },
-  "el meghaier": { price: 70, mode: "total" },
-  "المنيعة": { price: 70, mode: "total" },
-  "el menia": { price: 70, mode: "total" },
-  "البيض": { price: 70, mode: "total" },
-  "el bayadh": { price: 70, mode: "total" },
-  "الوادي": { price: 70, mode: "total" },
-  "el oued": { price: 70, mode: "total" },
   "بشار": { price: 70, mode: "total" },
   "bechar": { price: 70, mode: "total" },
-  "الاغواط": { price: 70, mode: "total" },
-  "laghouat": { price: 70, mode: "total" },
+  "الوادي": { price: 70, mode: "total" },
+  "el oued": { price: 70, mode: "total" },
 
   "ادرار": { price: 100, mode: "total" },
   "adrar": { price: 100, mode: "total" },
@@ -135,11 +100,14 @@ const sessions = new Map();
 function getSession(senderId) {
   if (!sessions.has(senderId)) {
     sessions.set(senderId, {
-      product: "luban",
-      problem: null,
-      gender: "female",
       stage: "start",
-      lastTotal: null
+      gender: "female",
+      name: null,
+      phone: null,
+      wilaya: null,
+      commune: null,
+      deliveryPrice: null,
+      total: null
     });
   }
   return sessions.get(senderId);
@@ -153,9 +121,9 @@ function normalize(text) {
     .replace(/[ة]/g, "ه")
     .replace(/[ى]/g, "ي")
     .replace(/[ذ]/g, "د")
-    .replace(/[ù]/g, "")
     .replace(/[éèêë]/g, "e")
     .replace(/[àâ]/g, "a")
+    .replace(/[ù]/g, "u")
     .replace(/[îï]/g, "i")
     .replace(/[ô]/g, "o")
     .replace(/[ç]/g, "c")
@@ -172,17 +140,10 @@ function wait(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
-function splitMessages(text) {
-  return text.split("---").map((x) => x.trim()).filter(Boolean);
-}
-
 function getOfferEndDate() {
   const date = new Date();
   date.setDate(date.getDate() + 2);
-  const months = [
-    "جانفي", "فيفري", "مارس", "أفريل", "ماي", "جوان",
-    "جويلية", "أوت", "سبتمبر", "أكتوبر", "نوفمبر", "ديسمبر"
-  ];
+  const months = ["جانفي", "فيفري", "مارس", "أفريل", "ماي", "جوان", "جويلية", "أوت", "سبتمبر", "أكتوبر", "نوفمبر", "ديسمبر"];
   return `${date.getDate()} ${months[date.getMonth()]}`;
 }
 
@@ -215,105 +176,97 @@ function findWilaya(text) {
   return null;
 }
 
-function isDeliveryQuestion(msg) {
-  return hasAny(msg, [
-    "توصيل", "التوصيل", "توصلو", "توصلولي", "كاين توصيل",
-    "شحال التوصيل", "livraison", "delivery", "a domicile",
-    "domicile", "وصل", "تبعثو", "الشحن"
+function isProblem(text) {
+  return hasAny(text, [
+    "تجاعيد", "هالات", "تصبغات", "حبوب", "اثار", "آثار", "مسام", "كلف", "خطوط",
+    "rides", "cernes", "taches", "boutons", "acne", "pores", "visage", "peau"
   ]);
 }
 
-function isDeliveryTimeQuestion(msg) {
-  return hasAny(msg, [
-    "وقتاش تلحق", "وقتاش تلحقني", "وقتاش توصل", "وقتاش توصلني",
-    "وقتاش تجي", "كي نكوموندي اليوم", "اذا كومونديت اليوم",
-    "اذا طلبت اليوم", "شحال من نهار", "شحال من يوم",
-    "في قداش توصل", "في قداش تلحق", "قداش وتلحق",
-    "قداش وتوصل", "delai", "délai", "combien de jours",
-    "quand arrive", "quand livraison", "waktach", "waktech",
-    "twsel", "tosel", "telha9", "tlhak", "ki ncommandi lyom"
+function isDeliveryQuestion(text) {
+  return hasAny(text, [
+    "توصيل", "شحال التوصيل", "كاين توصيل", "livraison", "delivery", "domicile"
   ]);
 }
 
-function isPriceQuestion(msg) {
-  return hasAny(msg, [
-    "السعر", "سعر", "بشحال", "شحال", "بكم",
-    "prix", "price", "bchhal", "chhal"
+function isDeliveryTimeQuestion(text) {
+  return hasAny(text, [
+    "وقتاش تلحق", "وقتاش توصل", "وقتاش تجي", "كي نكوموندي اليوم",
+    "شحال من نهار", "في قداش", "delai", "délai", "quand", "waktach", "twsel"
   ]);
 }
 
-function isStartMessage(msg) {
-  return hasAny(msg, [
-    "سلام", "salam", "slm", "cc", "bonjour", "bonsoir",
-    "مهتم", "interesse", "interested", "واش عندكم",
-    "الباك", "باك", "pack", "le pack", "المجموعه", "المجموعة",
-    "produit", "product", "groupe", "coffret", "لبان", "لبان الدكر",
-    "لبان الذكر", "لبنان الدكر", "لبنان الذكر", "luban", "louban", "loubane"
+function isOrderQuestion(text) {
+  return hasAny(text, [
+    "نحب نطلب", "نطلب", "طلب", "طلبية", "نكوموندي", "نأكد", "نشري",
+    "commande", "commander", "ncommandi", "acheter"
   ]);
 }
 
-function isProductWord(msg) {
-  return hasAny(msg, [
-    "الباك", "باك", "pack", "le pack", "المجموعه", "المجموعة",
-    "produit", "product", "groupe", "coffret", "لبان", "لبان الدكر",
-    "لبان الذكر", "لبنان الدكر", "لبنان الذكر", "luban", "louban", "loubane"
+function isUsageQuestion(text) {
+  return hasAny(text, [
+    "استعمال", "نستعمل", "طريقة الاستعمال", "كيفاش نستعمل", "utilisation", "utiliser"
   ]);
 }
 
-function isProblemMessage(msg) {
-  return hasAny(msg, [
-    "تجاعيد", "rides", "wrinkles", "هالات", "cernes",
-    "تصبغات", "taches", "pigmentation", "حبوب", "boutons",
-    "acne", "اثار", "آثار", "مسام", "pores", "كلف",
-    "melasma", "خطوط", "وجه", "visage", "بشرة", "peau", "شحوب"
+function isTrustQuestion(text) {
+  return hasAny(text, [
+    "مجرب", "مضمون", "يفيدني", "فيه نتيجة", "صارحيني", "خايفة", "efficace", "resultat"
   ]);
 }
 
-function isOrderQuestion(msg) {
-  return hasAny(msg, [
-    "نكوموندي", "نكوموند", "نطلب", "ندير الطلبية", "نأكد",
-    "نشتري", "نشري", "طلب", "الطلب", "طلبية", "الطلبية",
-    "حبيت نطلب", "بغيت نطلب", "نحوس نطلب", "كيفاش نكوموندي",
-    "كيفاه نكوموندي", "كيفاش نطلب", "كيفاه نطلب", "كيفاش نشري",
-    "كيفاه نشري", "commande", "commander", "ncommandi",
-    "ncommondi", "nchri", "acheter"
+function isProductPhotoQuestion(text) {
+  return hasAny(text, [
+    "صوريلي", "صورة", "صورة المنتج", "نشوف المنتج", "وريني", "photo", "image", "picture"
   ]);
 }
 
-function isUsageQuestion(msg) {
-  return hasAny(msg, [
-    "استعمال", "نستعمل", "نستعملها", "كيفاش نستعمل",
-    "كيفاه نستعمل", "كيفاش نديرها", "كيفاه نديرها",
-    "نحطها", "ندهنها", "utilisation", "utiliser",
-    "comment utiliser", "mode d emploi"
+function isProductContentQuestion(text) {
+  return hasAny(text, [
+    "وش فيها", "واش فيها", "مكونات", "وش تحتوي", "فيها واش", "pack", "le pack", "الباك", "المجموعة"
   ]);
 }
 
-function isTrustQuestion(msg) {
-  return hasAny(msg, [
-    "يفيدني", "يفيد", "صح", "مضمون", "جربت", "خايفة",
-    "مجرب", "جربتوه", "صارحيني", "فيه نتيجة", "كاين نتيجة",
-    "resultat", "efficace", "vrai", "garantie", "مليح", "مليحة"
+function isTotalConfirmation(text) {
+  return hasAny(text, [
+    "يعني تجيني", "يعني يجي", "كلش", "مع التوصيل", "total", "koulch", "kolch"
   ]);
 }
 
-function isProductPhotoQuestion(msg) {
-  return hasAny(msg, [
-    "صوريلي", "صورة المنتج", "نشوف المنتج", "ابعثيلي صورة",
-    "ابعتيلي صورة", "وريني المنتج", "كيف جاية", "كيفاه جاية",
-    "photo", "image"
-  ]);
+function mainMenuReplies() {
+  return [
+    { title: "السعر", payload: "MENU_PRICE" },
+    { title: "وش فيها؟", payload: "MENU_CONTENT" },
+    { title: "طريقة الاستعمال", payload: "MENU_USAGE" },
+    { title: "التوصيل", payload: "MENU_DELIVERY" },
+    { title: "آراء الزبائن", payload: "MENU_TESTIMONIALS" },
+    { title: "صورة المنتج", payload: "MENU_PHOTO" },
+    { title: "نحب نطلب", payload: "MENU_ORDER" }
+  ];
 }
 
-function isTotalConfirmation(msg) {
-  return hasAny(msg, [
-    "يعني تجيني", "يعني يجي", "كلش", "مع التوصيل", "300", "320", "350",
-    "total", "tout", "koulch", "kolch", "يعني 300", "يعني 320"
-  ]);
+function problemReplies() {
+  return [
+    { title: "تجاعيد", payload: "PROBLEM_WRINKLES" },
+    { title: "هالات", payload: "PROBLEM_DARK" },
+    { title: "تصبغات", payload: "PROBLEM_PIGMENT" },
+    { title: "آثار حبوب", payload: "PROBLEM_ACNE" },
+    { title: "حبوب", payload: "PROBLEM_PIMPLES" }
+  ];
+}
+
+function afterInfoReplies() {
+  return [
+    { title: "طريقة الاستعمال", payload: "MENU_USAGE" },
+    { title: "التوصيل", payload: "MENU_DELIVERY" },
+    { title: "مجرب؟", payload: "MENU_TESTIMONIALS" },
+    { title: "صورة المنتج", payload: "MENU_PHOTO" },
+    { title: "نحب نطلب", payload: "MENU_ORDER" }
+  ];
 }
 
 app.get("/", (req, res) => {
-  res.send("Luban AI Bot is running");
+  res.send("Dina Shop Menu Bot is running");
 });
 
 app.get("/webhook", (req, res) => {
@@ -338,265 +291,266 @@ app.post("/webhook", async (req, res) => {
       for (const entry of body.entry) {
         for (const event of entry.messaging || []) {
           const senderId = event.sender?.id;
-          const messageText = event.message?.text;
+          const text = event.message?.text || "";
+          const payload = event.message?.quick_reply?.payload || event.postback?.payload || null;
 
-          if (senderId && messageText) {
-            const replies = await handleMessage(senderId, messageText);
-
-            for (const reply of replies) {
-              await sendMessage(senderId, reply);
-              await wait(800);
-            }
+          if (senderId) {
+            await handleMessage(senderId, text, payload);
           }
         }
       }
     }
   } catch (error) {
-    console.error("Webhook error:", error.message);
+    console.error("Webhook error:", error.response?.data || error.message);
   }
 });
 
-async function handleMessage(senderId, messageText) {
+async function handleMessage(senderId, messageText, payload) {
   const session = getSession(senderId);
   const msg = normalize(messageText);
-
-  if (hasAny(msg, ["انا رجل", "راني رجل", "انا راجل", "راني راجل"])) {
-    session.gender = "male";
-    return ["مرحبا بيك خويا 😊"];
-  }
-
   const sister = session.gender === "male" ? "خويا" : "أختي";
   const honey = session.gender === "male" ? "خويا" : "حنونة";
 
-  if (isDeliveryTimeQuestion(msg)) {
-    return [
-      `إذا كومونديتي اليوم ${sister}، غالبًا طلبيتك تلحقك بين ${getDeliveryEstimate()} إن شاء الله 🚚🥰`,
-      "يعيطلك الليفرور ويجيبهالك لباب الدار ✅"
-    ];
+  if (hasAny(msg, ["انا رجل", "راني رجل", "انا راجل", "راني راجل"])) {
+    session.gender = "male";
+    await sendQuickReplies(senderId, "مرحبا بيك خويا 😊", mainMenuReplies());
+    return;
   }
 
-  if (hasAny(msg, [
-    "وين مقركم", "وين حالين", "نتوما منين", "منين نتوما",
-    "وين راكم", "وين المحل", "وين كاينين", "from where"
-  ])) {
-    return [
-      `رانا من العاصمة ${sister} 😊`,
-      "والتوصيل متوفر لجميع الولايات لباب الدار 🚚"
-    ];
+  if (session.stage === "collect_name" && msg.length >= 2 && !payload) {
+    session.name = messageText.trim();
+    session.stage = "collect_phone";
+    await sendMessage(senderId, `تمام ${sister} 🥰\nخليلي رقم الهاتف`);
+    return;
   }
 
-  if (hasAny(msg, ["مكتب", "للمكتب", "المكتب", "bureau"])) {
-    return [
-      `معندناش للمكتب ${sister} 😊`,
-      "يعيطلك الليفرور ويجيبهالك وين بغيتي لباب الدار ولا للمكان اللي تختاريه 🚚"
-    ];
-  }
-
-  if (isProblemMessage(msg)) {
-    session.problem = messageText;
-    session.stage = "persuasion";
-
-    await sendMessage(senderId, `أمممم فهمتك ${sister} 🥰`);
-    await sendMessage(senderId, "شوفي أختي متتحيريش، نعطيك هاذ المجموعة الأصلية كاملة 😍");
-    await sendMessage(senderId, "راهي تفيدك بزاف بإذن الله ❤️");
-    await sendMessage(senderId, "حاجة إيفيكاس ومضمونة ✨");
-    await sendMessage(senderId, "استعمال لمدة أسبوع وتبداي تشوفي نتيجة روعة إن شاء الله 😍");
-
-    for (const image of TESTIMONIALS) {
-      await sendImage(senderId, image);
-      await wait(500);
+  if (session.stage === "collect_phone" && !payload) {
+    const digits = messageText.replace(/\D/g, "");
+    if (digits.length >= 8) {
+      session.phone = digits;
+      session.stage = "collect_wilaya";
+      await sendMessage(senderId, "خليلي الولاية أختي 😊");
+      return;
     }
+    return;
+  }
 
-    return [
-      "نتائج روعة ومضمونة 🥰",
-      "ونزيدوك معاها ضمان لمدة شهر كامل بعد الاستعمال ❤️",
-      `يعني إذا ما خرجتش عليك النتيجة تقدري تتصلي بينا ونرجعولك دراهمك ${honey} 🌹`
-    ];
+  if (session.stage === "collect_wilaya" && !payload) {
+    const wilaya = findWilaya(msg);
+    if (!wilaya || wilaya.unavailable) return;
+
+    session.wilaya = wilaya.name;
+    session.deliveryPrice = wilaya.price;
+    session.total = PRODUCT_PRICE + wilaya.price;
+    session.stage = "collect_commune";
+    await sendMessage(senderId, "خليلي البلدية أختي 😊");
+    return;
+  }
+
+  if (session.stage === "collect_commune" && msg.length >= 2 && !payload) {
+    session.commune = messageText.trim();
+    session.stage = "done";
+
+    await sendMessage(
+      senderId,
+      `تم تسجيل الطلبية ${sister} ✅\nالاسم: ${session.name}\nالهاتف: ${session.phone}\nالولاية: ${session.wilaya}\nالبلدية: ${session.commune}\nالسعر الإجمالي: ${session.total} ألف`
+    );
+    await sendMessage(senderId, "يعيطلك الليفرور قبل ما يجيك الطلب إن شاء الله 🚚🥰");
+    return;
+  }
+
+  if (!payload && session.stage === "start") {
+    await sendQuickReplies(
+      senderId,
+      "مرحبا أختي 🥰\nاختاري وش حابة تعرفي على مجموعة اللبان الذكر العماني الأصلية:",
+      mainMenuReplies()
+    );
+    session.stage = "menu";
+    return;
+  }
+
+  if (payload === "MENU_PRICE") {
+    await sendMessage(
+      senderId,
+      `عرض خاص صالح لغاية ${getOfferEndDate()} 😍\nمجموعة اللبان الذكر العماني الأصلية فيها زيت + كريم + صابون هدية مجانية 🎁\nالسعر 250 ألف فقط\n+ مصاريف التوصيل حسب الولاية 🚚`
+    );
+    await sendQuickReplies(senderId, `واش عندك ${honey}؟`, problemReplies());
+    return;
+  }
+
+  if (payload && payload.startsWith("PROBLEM_")) {
+    await persuasionFlow(senderId, sister, honey);
+    return;
+  }
+
+  if (payload === "MENU_CONTENT") {
+    await sendMessage(senderId, "مجموعة اللبان الذكر العماني فيها زيت + كريم + صابون هدية مجانية 🎁");
+    await sendImage(senderId, PRODUCT_IMAGE);
+    await sendQuickReplies(senderId, "السعر 250 ألف فقط 🥰", afterInfoReplies());
+    return;
+  }
+
+  if (payload === "MENU_PHOTO") {
+    await sendMessage(senderId, `هادي هي المجموعة ${sister} 🥰`);
+    await sendImage(senderId, PRODUCT_IMAGE);
+    await sendQuickReplies(senderId, "فيها زيت + كريم + صابون هدية مجانية 🎁", afterInfoReplies());
+    return;
+  }
+
+  if (payload === "MENU_USAGE") {
+    await sendQuickReplies(
+      senderId,
+      "تديري الكريم في وجهك وتخليه 20 دقيقة 😊\nمن بعد تديري الزيت وتخليه 20 دقيقة ثاني\nمن بعد ترقدي عادي\nوغدوة الصباح تغسلي بالصابون\nوتقدري تستعملي الكريم صباح كمرطب وتخرجي عادي 🥰",
+      afterInfoReplies()
+    );
+    return;
+  }
+
+  if (payload === "MENU_TESTIMONIALS") {
+    await sendMessage(senderId, `نعم ${sister} راه مجرب ومضمون بإذن الله 🥰`);
+    await sendTestimonials(senderId);
+    await sendQuickReplies(senderId, "نتائج روعة ومضمونة بشهادة الزبائن ❤️", afterInfoReplies());
+    return;
+  }
+
+  if (payload === "MENU_DELIVERY") {
+    session.stage = "waiting_delivery_wilaya";
+    await sendMessage(senderId, "اكتبي اسم الولاية فقط أختي 😊");
+    return;
+  }
+
+  if (payload === "MENU_ORDER") {
+    session.stage = "collect_name";
+    await sendMessage(senderId, `تمام ${sister} 🥰\nخليلي الاسم فقط باش نثبت الطلبية`);
+    return;
+  }
+
+  if (isProblem(msg)) {
+    await persuasionFlow(senderId, sister, honey);
+    return;
+  }
+
+  if (isDeliveryTimeQuestion(msg)) {
+    await sendMessage(senderId, `إذا كومونديتي اليوم ${sister}، غالبًا طلبيتك تلحقك بين ${getDeliveryEstimate()} إن شاء الله 🚚🥰`);
+    return;
   }
 
   const wilaya = findWilaya(msg);
-
-  if (wilaya && (isDeliveryQuestion(msg) || msg.length <= 35)) {
+  if (wilaya && (isDeliveryQuestion(msg) || session.stage === "waiting_delivery_wilaya" || msg.length <= 35)) {
     if (wilaya.unavailable) {
-      return [`للأسف حاليًا ما عندناش توصيل لهذه الولاية ${sister} 😔`];
+      await sendMessage(senderId, `للأسف حاليًا ما عندناش توصيل لهذه الولاية ${sister} 😔`);
+      return;
     }
 
     const total = PRODUCT_PRICE + wilaya.price;
-    session.lastTotal = total;
+    session.total = total;
 
     if (wilaya.mode === "total") {
-      return [
-        "خيار الناس 🥰",
-        `السعر الإجمالي مع التوصيل لباب الدار ${total} ألف 🚚`
-      ];
+      await sendQuickReplies(senderId, `خيار الناس 🥰\nالسعر الإجمالي مع التوصيل لباب الدار ${total} ألف 🚚`, afterInfoReplies());
+    } else {
+      await sendQuickReplies(senderId, `خيار الناس 🥰\nالتوصيل ${wilaya.price} ألف لباب الدار 🚚`, afterInfoReplies());
     }
-
-    return [
-      "خيار الناس 🥰",
-      `التوصيل ${wilaya.price} ألف لباب الدار 🚚`
-    ];
+    return;
   }
 
-  if (isDeliveryQuestion(msg) && !wilaya) {
-    return [`لأي ولاية التوصيل ${sister}؟ 😊`];
+  if (isDeliveryQuestion(msg)) {
+    session.stage = "waiting_delivery_wilaya";
+    await sendMessage(senderId, "اكتبي اسم الولاية فقط أختي 😊");
+    return;
   }
 
-  if (isTotalConfirmation(msg)) {
-    return [
-      `نعم ${sister} 🥰`,
-      "هذا هو السعر مع التوصيل لباب الدار 🚚",
-      `للطلب خليلي الاسم ورقم الهاتف والولاية والبلدية ${sister} 😊`
-    ];
-  }
-
-  if ((isStartMessage(msg) || isPriceQuestion(msg)) && session.stage === "start") {
-    session.stage = "asked_problem";
-    return [
-      `وعليكم السلام ${sister} 🥰\nعرض خاص صالح لغاية ${getOfferEndDate()} 😍\nمجموعة اللبان الذكر العماني الأصلية فيها:\nزيت + كريم + صابون هدية مجانية 🎁\nالسعر 250 ألف فقط\n+ مصاريف التوصيل حسب الولاية 🚚`,
-      `قوليلي برك ${honey}، واش عندك؟ تجاعيد؟ حبوب؟ هالات؟ تصبغات؟ ولا آثار حبوب؟ 😊`
-    ];
+  if (isProductContentQuestion(msg)) {
+    await sendMessage(senderId, "مجموعة اللبان الذكر العماني فيها زيت + كريم + صابون هدية مجانية 🎁");
+    await sendImage(senderId, PRODUCT_IMAGE);
+    await sendQuickReplies(senderId, "السعر 250 ألف فقط 🥰", afterInfoReplies());
+    return;
   }
 
   if (isProductPhotoQuestion(msg)) {
-    await sendMessage(senderId, `هادي هي مجموعة اللبان الذكر العماني الأصلية ${sister} 🥰`);
+    await sendMessage(senderId, `هادي هي المجموعة ${sister} 🥰`);
     await sendImage(senderId, PRODUCT_IMAGE);
-    return [
-      "فيها زيت + كريم + صابون هدية مجانية 🎁",
-      "السعر 250 ألف فقط 🥰"
-    ];
-  }
-
-  if (hasAny(msg, ["واش فيها", "وش فيها", "مكونات", "ماذا تحتوي", "وش تحتوي"])) {
-    await sendMessage(senderId, "مجموعة اللبان الذكر العماني فيها زيت + كريم + صابون هدية مجانية 🎁");
-    await sendImage(senderId, PRODUCT_IMAGE);
-    return ["السعر 250 ألف فقط 🥰"];
-  }
-
-  if (isPriceQuestion(msg)) {
-    return [
-      `السعر 250 ألف فقط ${sister} 🥰`,
-      "والتوصيل حسب الولاية 🚚"
-    ];
-  }
-
-  if (isOrderQuestion(msg)) {
-    session.stage = "order";
-    return [`للطلب خليلي الاسم ورقم الهاتف والولاية والبلدية ${sister} 😊`];
+    await sendQuickReplies(senderId, "فيها زيت + كريم + صابون هدية مجانية 🎁", afterInfoReplies());
+    return;
   }
 
   if (isUsageQuestion(msg)) {
-    return [
-      "تديري الكريم في وجهك وتخليه 20 دقيقة 😊",
-      "من بعد تديري الزيت وتخليه 20 دقيقة ثاني",
-      "من بعد ترقدي عادي",
-      "وغدوة الصباح تغسلي بالصابون",
-      `وتقدري تستعملي الكريم صباح كمرطب وتخرجي عادي ${sister} 🥰`
-    ];
+    await sendQuickReplies(
+      senderId,
+      "تديري الكريم في وجهك وتخليه 20 دقيقة 😊\nمن بعد تديري الزيت وتخليه 20 دقيقة ثاني\nوغدوة الصباح تغسلي بالصابون 🥰",
+      afterInfoReplies()
+    );
+    return;
   }
 
   if (isTrustQuestion(msg)) {
     await sendMessage(senderId, `نعم ${sister} راه مجرب ومضمون بإذن الله 🥰`);
-    await sendMessage(senderId, "رانا نخدمو بيه مدة طويلة والحمد لله");
-
-    for (const image of TESTIMONIALS) {
-      await sendImage(senderId, image);
-      await wait(500);
-    }
-
-    return [
-      "نتائج روعة ومضمونة بشهادة الزبائن تاعنا ❤️",
-      `بإذن الله رايحة تشكريه عليه بزاف ${honey} 😍`,
-      "ونزيدوك معاها ضمان لمدة شهر كامل بعد الاستعمال ❤️"
-    ];
+    await sendTestimonials(senderId);
+    await sendQuickReplies(senderId, "بإذن الله رايحة تشكريه عليه بزاف حنونة 😍", afterInfoReplies());
+    return;
   }
 
-  if (isProductWord(msg)) {
-    return [
-      "مجموعة اللبان الذكر العماني الأصلية فيها زيت + كريم + صابون هدية مجانية 🎁",
-      `السعر 250 ألف فقط ${sister} 🥰`,
-      `وش عندك ${honey}؟ تجاعيد؟ هالات؟ تصبغات؟ ولا آثار حبوب؟ 😊`
-    ];
+  if (isOrderQuestion(msg)) {
+    session.stage = "collect_name";
+    await sendMessage(senderId, `تمام ${sister} 🥰\nخليلي الاسم فقط باش نثبت الطلبية`);
+    return;
   }
 
-  if (hasAny(msg, ["وقتاش النتيجة", "متى النتيجة", "تبان النتيجة"])) {
-    return ["من الأسبوع الأول تبداي تشوفي نتيجة روعة إن شاء الله 😍"];
+  if (isTotalConfirmation(msg)) {
+    await sendMessage(senderId, `نعم ${sister} 🥰`);
+    await sendQuickReplies(senderId, "هذا هو السعر مع التوصيل لباب الدار 🚚", [
+      { title: "نحب نطلب", payload: "MENU_ORDER" },
+      { title: "طريقة الاستعمال", payload: "MENU_USAGE" },
+      { title: "آراء الزبائن", payload: "MENU_TESTIMONIALS" }
+    ]);
+    return;
   }
 
-  if (hasAny(msg, ["غالي", "نقصي", "ساعديني", "ديرولي", "cher"])) {
-    return [
-      `والله ${sister} بعناها قبل بسعر 290 ألف 🥰`,
-      "وحاليًا راهي داخلة في تخفيض، السعر 250 ألف فقط ❤️",
-      `بعد أيام ترجع للسعر الأصلي ${honey}`
-    ];
-  }
-
-  if (hasAny(msg, ["ما عنديش", "مازال ما خلصتش", "زوالية", "ظروفي", "بعد أسبوع"])) {
-    return [
-      `والله غالب ${sister} 🥰`,
-      "حاليًا راهي داخلة في تخفيض فقط وبعد أيام ترجع للسعر الأصلي",
-      `ومرحبا بيك في أي وقت ${honey} ❤️`
-    ];
-  }
-
-  if (hasAny(msg, ["شكرا", "يعطيك الصحة", "merci"])) return [`عفوا ${sister} 🥰`];
-  if (hasAny(msg, ["يسلمك"])) return [`يعيشك ${honey} ❤️`];
-  if (hasAny(msg, ["يعيشك"])) return [`يسلمك ${sister} 🥰`];
-  if (hasAny(msg, ["اوكي", "ok", "okay"])) return [`أوكي ${sister} 🥰`];
-  if (hasAny(msg, ["نرجعلك", "نشوف", "نبحثك"])) return [`مرحبا بيك في أي وقت ${honey} 🥰`];
-
-  const aiReply = await generateReply(messageText, session);
-  return splitMessages(aiReply);
+  return;
 }
 
-async function generateReply(userMessage, session) {
-  const response = await openai.chat.completions.create({
-    model: "gpt-4o-mini",
-    messages: [
-      {
-        role: "system",
-        content: `
-أنت بوت مبيعات جزائري لصفحة Dina Shop.
-الصفحة تبيع منتجًا واحدًا فقط: مجموعة اللبان الذكر العماني الأصلية.
+async function persuasionFlow(senderId, sister, honey) {
+  await sendMessage(senderId, `أمممم فهمتك ${sister} 🥰`);
+  await wait(400);
+  await sendMessage(senderId, "شوفي أختي متتحيريش، نعطيك هاذ المجموعة الأصلية كاملة 😍");
+  await wait(400);
+  await sendMessage(senderId, "راهي تفيدك بزاف بإذن الله ❤️");
+  await wait(400);
+  await sendMessage(senderId, "حاجة إيفيكاس ومضمونة ✨");
+  await wait(400);
+  await sendMessage(senderId, "استعمال لمدة أسبوع وتبداي تشوفي نتيجة روعة إن شاء الله 😍");
+  await wait(500);
 
-لا تتكلم أبدًا عن الأملج أو الشعر أو منتجات أخرى.
+  await sendTestimonials(senderId);
 
-المنتج:
-مجموعة اللبان الذكر العماني الأصلية فيها زيت + كريم + صابون هدية مجانية.
-السعر 250 ألف فقط.
-لا تكتب 2500 دج ولا تخترع أسعار التوصيل.
+  await sendQuickReplies(
+    senderId,
+    `نتائج روعة ومضمونة 🥰\nونزيدوك معاها ضمان لمدة شهر كامل بعد الاستعمال ❤️\nيعني إذا ما خرجتش عليك النتيجة تقدري تتصلي بينا ونرجعولك دراهمك ${honey} 🌹`,
+    afterInfoReplies()
+  );
+}
 
-تستعمل للتجاعيد، الخطوط، التصبغات، آثار الحبوب، الهالات، المسام، شحوب البشرة، وترطيب الوجه.
+async function sendTestimonials(senderId) {
+  for (const image of TESTIMONIALS) {
+    await sendImage(senderId, image);
+    await wait(450);
+  }
+}
 
-طريقة الاستعمال:
-الكريم 20 دقيقة، ثم الزيت 20 دقيقة، ثم النوم، والصباح تغسل بالصابون.
-الكريم يمكن استعماله صباحًا كمرطب.
-
-السياق الحالي:
-المشكلة: ${session.problem || "غير محددة"}
-المرحلة: ${session.stage || "غير محددة"}
-الجنس: ${session.gender}
-
-قواعد صارمة:
-- تحدث باللهجة الجزائرية فقط.
-- افهم العربية والفرنسية والدارجة المكتوبة بحروف لاتينية.
-- اعتبر الزبون امرأة إلا إذا قال أنه رجل.
-- استعمل: أختي، حنونة، شوفي، متتحيريش، يعيشك.
-- ممنوع استعمال: حبيبتي، عزيزتي، أهلين، مرحبًا، كيف حالك اليوم.
-- لا تبدأ محادثة جديدة إذا الزبون في وسط الحوار.
-- لا تعيد العرض إذا المحادثة متقدمة.
-- لا تخترع أسعار التوصيل أبدًا.
-- إذا سأل عن التوصيل ولم تعرف الولاية اسأله عن الولاية فقط.
-- إذا قالت الزبونة: يعني تجيني بكذا؟ أجب بنعم واختصر.
-- إذا لم تفهم، اسأل سؤالًا واحدًا فقط.
-- لا تكتب فقرات طويلة.
-- هدفك البيع وجمع الطلب.
-`
-      },
-      { role: "user", content: userMessage }
-    ]
-  });
-
-  return response.choices[0].message.content;
+async function sendQuickReplies(senderId, text, replies) {
+  await axios.post(
+    `https://graph.facebook.com/v19.0/me/messages?access_token=${PAGE_ACCESS_TOKEN}`,
+    {
+      recipient: { id: senderId },
+      message: {
+        text,
+        quick_replies: replies.slice(0, 13).map((r) => ({
+          content_type: "text",
+          title: r.title,
+          payload: r.payload
+        }))
+      }
+    }
+  );
 }
 
 async function sendImage(senderId, imageUrl) {
@@ -608,10 +562,7 @@ async function sendImage(senderId, imageUrl) {
         message: {
           attachment: {
             type: "image",
-            payload: {
-              url: imageUrl,
-              is_reusable: true
-            }
+            payload: { url: imageUrl, is_reusable: true }
           }
         }
       }
