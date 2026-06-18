@@ -3,6 +3,7 @@ import axios from "axios";
 
 const app = express();
 app.use(express.json());
+app.use(express.static("."));
 
 const VERIFY_TOKEN = "amlaj_verify_token";
 const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
@@ -16,7 +17,7 @@ const IMAGES = {
   delivery: "https://raw.githubusercontent.com/aimenberhail-tech/amlaj-ai-bot/main/images/delivery.png"
 };
 
-const ORDER_FORM_URL = "https://sites.google.com/view/dina-shop-privacy-policy";
+const ORDER_FORM_URL = "https://amlaj-ai-bot.onrender.com/order.html";
 
 function normalize(text) {
   return (text || "")
