@@ -16,7 +16,6 @@ const IMAGES = {
   delivery: "https://raw.githubusercontent.com/aimenberhail-tech/amlaj-ai-bot/main/images/delivery.png"
 };
 
-// لاحقًا نضع هنا رابط استمارة الطلب
 const ORDER_FORM_URL = "https://sites.google.com/view/dina-shop-privacy-policy";
 
 function normalize(text) {
@@ -107,42 +106,68 @@ app.post("/webhook", async (req, res) => {
 async function handleMessage(senderId, messageText, payload) {
   const msg = normalize(messageText);
 
-  if (payload === "MENU_BENEFITS" || hasAny(msg, ["تجاعيد", "هالات", "تصبغات", "حبوب", "اثار", "آثار"])) {
+  if (
+    payload === "MENU_BENEFITS" ||
+    hasAny(msg, ["تجاعيد", "هالات", "تصبغات", "حبوب", "اثار", "آثار", "كلف", "مسام"])
+  ) {
     await sendImage(senderId, IMAGES.benefits);
     await wait(500);
     await sendQuickReplies(senderId, menuText(), mainMenuReplies());
     return;
   }
 
-  if (payload === "MENU_USAGE" || hasAny(msg, ["استعمال", "طريقة الاستعمال", "كيفاش نستعمل"])) {
+  if (
+    payload === "MENU_USAGE" ||
+    hasAny(msg, ["استعمال", "طريقة الاستعمال", "كيفاش نستعمل", "نستعمل", "usage", "utilisation"])
+  ) {
     await sendImage(senderId, IMAGES.usage);
     await wait(500);
     await sendQuickReplies(senderId, menuText(), mainMenuReplies());
     return;
   }
 
-  if (payload === "MENU_RESULTS" || hasAny(msg, ["نتائج", "شهادات", "مجرب", "مضمون"])) {
+  if (
+    payload === "MENU_RESULTS" ||
+    hasAny(msg, ["نتائج", "شهادات", "مجرب", "مضمون", "يفيد", "resultat", "efficace"])
+  ) {
     await sendImage(senderId, IMAGES.results);
     await wait(500);
     await sendQuickReplies(senderId, menuText(), mainMenuReplies());
     return;
   }
 
-  if (payload === "MENU_SAFE" || hasAny(msg, ["نوع البشرة", "اضرار", "أضرار", "حساسة"])) {
+  if (
+    payload === "MENU_SAFE" ||
+    hasAny(msg, ["نوع البشرة", "اضرار", "أضرار", "حساسة", "بشرة حساسة", "safe"])
+  ) {
     await sendImage(senderId, IMAGES.safe);
     await wait(500);
     await sendQuickReplies(senderId, menuText(), mainMenuReplies());
     return;
   }
 
-  if (payload === "MENU_DELIVERY" || hasAny(msg, ["توصيل", "السعر", "شحال", "بشحال", "prix", "livraison"])) {
+  if (
+    payload === "MENU_DELIVERY" ||
+    hasAny(msg, [
+      "توصيل",
+      "التوصيل",
+      "توصلو",
+      "توصلولي",
+      "الشحن",
+      "livraison",
+      "delivery"
+    ])
+  ) {
     await sendImage(senderId, IMAGES.delivery);
     await wait(500);
     await sendQuickReplies(senderId, menuText(), mainMenuReplies());
     return;
   }
 
-  if (payload === "MENU_ORDER" || hasAny(msg, ["نطلب", "طلب", "نكوموندي", "نحب نطلب", "commande"])) {
+  if (
+    payload === "MENU_ORDER" ||
+    hasAny(msg, ["نطلب", "طلب", "نكوموندي", "نحب نطلب", "commande", "commander"])
+  ) {
     await sendButtonMessage(
       senderId,
       "باش تأكدي الطلب حنونة، اضغطي على الزر وعمّري الاستمارة 🛒🥰",
@@ -157,7 +182,6 @@ async function handleMessage(senderId, messageText, payload) {
     return;
   }
 
-  // أي رسالة أخرى: نرسل صورة العرض ثم الأزرار
   await sendImage(senderId, IMAGES.offer);
   await wait(500);
   await sendQuickReplies(senderId, menuText(), mainMenuReplies());
