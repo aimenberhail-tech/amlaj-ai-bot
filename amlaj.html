@@ -165,14 +165,16 @@ input, select {
 
 .total {
   margin-top: 18px;
-  padding: 15px;
-  border-radius: 16px;
-  background: #0d6efd;
-  color: white;
+  padding: 16px;
+  border-radius: 18px;
+  background: #ffffff;
+  color: #0d47a1;
   text-align: center;
-  line-height: 1.7;
+  line-height: 1.8;
   font-weight: bold;
-  font-size: 17px;
+  font-size: 16px;
+  border: 2px dashed #0d6efd;
+  box-shadow: 0 6px 18px rgba(13,110,253,0.12);
 }
 
 button {
@@ -443,9 +445,9 @@ function updateTotal() {
   const total = selectedProductPrice + delivery;
 
   totalBox.innerHTML =
-    "سعر المنتج: " + selectedProductPrice + " دج<br>" +
-    "سعر التوصيل: " + delivery + " دج<br>" +
-    "المجموع النهائي: " + total + " دج";
+  "سعر المنتج: " + selectedProductPrice + " دج<br>" +
+  "سعر التوصيل: " + delivery + " دج<br>" +
+  "<span style='font-size:20px;color:#0d6efd'>المجموع النهائي: " + total + " دج</span>";
 }
 
 function submitOrder() {
