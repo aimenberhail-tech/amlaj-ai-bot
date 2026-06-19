@@ -211,28 +211,78 @@ button {
     <label>اختار العرض</label>
 
     <div class="products">
-      <div class="product-card" onclick="selectProduct('زيت الأملج الأصلي', 1900, this)">
-        <div class="product-title">زيت الأملج الأصلي</div>
-        <div class="product-price">1900 دج</div>
-      </div>
+      <div class="products">
 
-      <div class="product-card" onclick="selectProduct('بخاخ الأملج الأصلي', 1700, this)">
-        <div class="product-title">بخاخ الأملج الأصلي</div>
-        <div class="product-price">1700 دج</div>
-      </div>
+<div class="product-card"
+onclick="selectProduct('زيت الأملج الأصلي',1900,this)">
 
-      <div class="product-card active" onclick="selectProduct('العرض الكامل: زيت + بخاخ', 2900, this)">
-        <span class="badge">🔥 الأكثر طلباً</span>
-        <div class="product-title">زيت + بخاخ الأملج الأصلي</div>
-        <div class="product-price">2900 دج</div>
-      </div>
-    </div>
+<img src="https://raw.githubusercontent.com/aimenberhail-tech/amlaj-ai-bot/main/images/amlaj-oil.png"
+style="width:80px;height:auto;margin:auto;display:block;">
+
+<div class="product-title">
+زيت الأملج الأصلي
+</div>
+
+<div class="product-price">
+1900 دج
+</div>
+
+</div>
+
+<div class="product-card"
+onclick="selectProduct('بخاخ الأملج الأصلي',1700,this)">
+
+<img src="https://raw.githubusercontent.com/aimenberhail-tech/amlaj-ai-bot/main/images/amlaj-spray.png"
+style="width:80px;height:auto;margin:auto;display:block;">
+
+<div class="product-title">
+بخاخ الأملج الأصلي
+</div>
+
+<div class="product-price">
+1700 دج
+</div>
+
+</div>
+
+<div class="product-card active"
+onclick="selectProduct('العرض الكامل: زيت + بخاخ',2900,this)">
+
+<span class="badge">
+🔥 الأكثر طلباً
+</span>
+
+<div style="display:flex;justify-content:center;gap:10px">
+
+<img src="https://raw.githubusercontent.com/aimenberhail-tech/amlaj-ai-bot/main/images/amlaj-oil.png"
+style="width:60px">
+
+<img src="https://raw.githubusercontent.com/aimenberhail-tech/amlaj-ai-bot/main/images/amlaj-spray.png"
+style="width:60px">
+
+</div>
+
+<div class="product-title">
+زيت + بخاخ الأملج
+</div>
+
+<div class="product-price">
+2900 دج
+</div>
+
+</div>
+
+</div>
 
     <label>الاسم واللقب</label>
     <input id="name" type="text" placeholder="اكتب الاسم واللقب">
 
     <label>رقم الهاتف</label>
-    <input id="phone" type="tel" placeholder="05xxxxxxxx">
+    <input
+id="phone"
+type="tel"
+placeholder="0"
+maxlength="10">
 
     <label>الولاية</label>
     <select id="wilaya" onchange="updateTotal()">
@@ -397,10 +447,30 @@ function submitOrder() {
   const commune = document.getElementById("commune").value.trim();
   const btn = document.getElementById("submitBtn");
 
-  if (!name || !phone || !wilaya || !commune) {
-    alert("كمّل المعلومات من فضلك");
-    return;
-  }
+  if (!name) {
+alert("يرجى إدخال الاسم واللقب");
+return;
+}
+
+if (!phone) {
+alert("يرجى إدخال رقم الهاتف");
+return;
+}
+
+if (phone.length < 10) {
+alert("رقم الهاتف غير صحيح");
+return;
+}
+
+if (!wilaya) {
+alert("يرجى اختيار الولاية");
+return;
+}
+
+if (!commune) {
+alert("يرجى إدخال البلدية");
+return;
+}
 
   const prices = deliveryPrices[wilaya];
   const delivery = selectedDeliveryType === "bureau" ? prices.bureau : prices.home;
