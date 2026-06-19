@@ -76,19 +76,18 @@ input, select {
 
 .products {
   display: grid;
-  gap: 12px;
+  grid-template-columns: repeat(3,1fr);
+  gap: 8px;
   margin-top: 12px;
 }
 
 .product-card {
   border: 2px solid #d6e8ff;
-  border-radius: 16px;
-  padding: 14px;
-  background: #f8fbff;
-  cursor: pointer;
-  transition: 0.2s;
+  border-radius: 12px;
+  padding: 8px;
+  text-align: center;
 }
-
+  
 .product-card.active {
   border-color: #0d6efd;
   background: #eaf3ff;
@@ -98,14 +97,14 @@ input, select {
 .product-title {
   font-weight: bold;
   color: #0d47a1;
-  font-size: 17px;
+  font-size: 12px;
+  line-height: 1.3;
 }
 
 .product-price {
   color: #0d6efd;
-  font-size: 22px;
+  font-size: 15px;
   font-weight: bold;
-  margin-top: 6px;
 }
 
 .badge {
@@ -217,7 +216,7 @@ button {
 onclick="selectProduct('زيت الأملج الأصلي',1900,this)">
 
 <img src="https://raw.githubusercontent.com/aimenberhail-tech/amlaj-ai-bot/main/images/amlaj-oil.png"
-style="width:80px;height:auto;margin:auto;display:block;">
+style="width:45px";height:auto;margin:auto;display:block;">
 
 <div class="product-title">
 زيت الأملج الأصلي
@@ -233,7 +232,7 @@ style="width:80px;height:auto;margin:auto;display:block;">
 onclick="selectProduct('بخاخ الأملج الأصلي',1700,this)">
 
 <img src="https://raw.githubusercontent.com/aimenberhail-tech/amlaj-ai-bot/main/images/amlaj-spray.png"
-style="width:80px;height:auto;margin:auto;display:block;">
+style="width:45px";height:auto;margin:auto;display:block;">
 
 <div class="product-title">
 بخاخ الأملج الأصلي
@@ -255,10 +254,10 @@ onclick="selectProduct('العرض الكامل: زيت + بخاخ',2900,this)">
 <div style="display:flex;justify-content:center;gap:10px">
 
 <img src="https://raw.githubusercontent.com/aimenberhail-tech/amlaj-ai-bot/main/images/amlaj-oil.png"
-style="width:60px">
+style="width:38px">
 
 <img src="https://raw.githubusercontent.com/aimenberhail-tech/amlaj-ai-bot/main/images/amlaj-spray.png"
-style="width:60px">
+style="width:38px">
 
 </div>
 
@@ -504,6 +503,23 @@ return;
   });
 }
 </script>
+<script>
+document.body.addEventListener("click", function(e){
 
+  if(
+    e.target.tagName !== "INPUT" &&
+    e.target.tagName !== "SELECT" &&
+    e.target.tagName !== "BUTTON" &&
+    !e.target.closest("#orderForm")
+  ){
+
+    document.getElementById("orderForm").scrollIntoView({
+      behavior:"smooth"
+    });
+
+  }
+
+});
+</script>
 </body>
 </html>
