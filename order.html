@@ -306,6 +306,14 @@ function submitOrder() {
   const delivery = getDelivery(wilaya);
   const total = PRODUCT_PRICE + delivery;
 
+  if (typeof gtag === "function") {
+    gtag("event", "order_submit_clicked", {
+      event_category: "order",
+      event_label: wilaya,
+      value: total
+    });
+  }
+
   const formData = new FormData();
   formData.append("name", name);
   formData.append("phone", phone);
@@ -320,16 +328,22 @@ function submitOrder() {
   fetch(SCRIPT_URL, {
     method: "POST",
     body: formData
-  }).then(() => {
-    window.location.href = "/thankyou.html";
-    btn.textContent = "✅ تم إرسال الطلب";
-  }).catch(() => {
-    alert("صار مشكل في الإرسال، جربي مرة أخرى");
-    btn.disabled = false;
-    btn.textContent = "✅ تأكيد الطلب";
-  });
-}
-</script>
+  })
+    .then(response => response.text())
+    .then(orderId => {
+      if (typeof gtag === "function") {
+        gtag("event", "order_submitted", {
+          event_category: "order",
+          event_label: wilaya,
+          value: total
+        });
+      }
 
-</body>
-</html>
+      window.location.href = "/thankyou.html?order=" + encodeURIComponent(orderId);
+    })
+    .catch(() => {
+      alert("صار مشكل في الإرسال، جربي مرة أخرى");
+      btn.disabled = false;
+      btn.textContent = "✅ تأكيد الطلب";
+    });
+}
