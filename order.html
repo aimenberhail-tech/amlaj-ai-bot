@@ -2,18 +2,18 @@
 <html lang="ar" dir="rtl">
 <head>
   <!-- Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-9XP43P9EBX"></script>
-<script>
-window.dataLayer = window.dataLayer || [];
-function gtag(){dataLayer.push(arguments);}
-gtag('js', new Date());
-
-gtag('config', 'G-9XP43P9EBX');
-</script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-9XP43P9EBX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-9XP43P9EBX');
+  </script>
 
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>تأكيد الطلب</title>
+
   <style>
     body {
       margin: 0;
@@ -114,15 +114,6 @@ gtag('config', 'G-9XP43P9EBX');
       cursor: pointer;
     }
 
-    .success {
-      display: none;
-      text-align: center;
-      color: #7CFC00;
-      margin-top: 18px;
-      font-weight: bold;
-      line-height: 1.8;
-    }
-
     .section-title {
       text-align: center;
       color: #d4af37;
@@ -207,11 +198,6 @@ gtag('config', 'G-9XP43P9EBX');
     </div>
 
     <button id="submitBtn" onclick="submitOrder()">✅ تأكيد الطلب</button>
-
-    <div class="success" id="successMsg">
-      ✅ تم استلام طلبك بنجاح حنونة<br>
-      سيتصل بك فريقنا لتأكيد الطلب 🥰
-    </div>
   </div>
 
   <div class="section-title">كل التفاصيل على المنتج 👇</div>
@@ -253,14 +239,15 @@ const farSouth = [
   "عين صالح", "عين قزام", "جانت"
 ];
 
-const select = document.getElementById("wilaya");
-  
+document.addEventListener("DOMContentLoaded", function () {
+  const select = document.getElementById("wilaya");
 
-wilayas.forEach(w => {
-  const option = document.createElement("option");
-  option.value = w;
-  option.textContent = w;
-  select.appendChild(option);
+  wilayas.forEach(function (w) {
+    const option = document.createElement("option");
+    option.value = w;
+    option.textContent = w;
+    select.appendChild(option);
+  });
 });
 
 function getDelivery(wilaya) {
@@ -282,7 +269,7 @@ function updateTotal() {
   const delivery = getDelivery(wilaya);
   const total = PRODUCT_PRICE + delivery;
 
-  box.innerHTML = `التوصيل لباب المنزل: ${delivery} دج<br>المجموع: ${total} دج`;
+  box.innerHTML = "التوصيل لباب المنزل: " + delivery + " دج<br>المجموع: " + total + " دج";
 }
 
 function goToForm() {
@@ -330,21 +317,25 @@ function submitOrder() {
     method: "POST",
     body: formData
   })
-    .then(response => response.text())
-    .then(orderId => {
-      if (typeof gtag === "function") {
-        gtag("event", "order_submitted", {
-          event_category: "order",
-          event_label: wilaya,
-          value: total
-        });
-      }
+  .then(response => response.text())
+  .then(orderId => {
+    if (typeof gtag === "function") {
+      gtag("event", "order_submitted", {
+        event_category: "order",
+        event_label: wilaya,
+        value: total
+      });
+    }
 
-      window.location.href = "/thankyou.html?order=" + encodeURIComponent(orderId);
-    })
-    .catch(() => {
-      alert("صار مشكل في الإرسال، جربي مرة أخرى");
-      btn.disabled = false;
-      btn.textContent = "✅ تأكيد الطلب";
-    });
+    window.location.href = "/thankyou.html?order=" + encodeURIComponent(orderId);
+  })
+  .catch(() => {
+    alert("صار مشكل في الإرسال، جربي مرة أخرى");
+    btn.disabled = false;
+    btn.textContent = "✅ تأكيد الطلب";
+  });
 }
+</script>
+
+</body>
+</html>
