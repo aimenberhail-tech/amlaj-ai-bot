@@ -13,7 +13,6 @@ const IMAGES = {
   benefits: "https://raw.githubusercontent.com/aimenberhail-tech/amlaj-ai-bot/main/images/benefits.png",
   results: "https://raw.githubusercontent.com/aimenberhail-tech/amlaj-ai-bot/main/images/results.png",
   usage: "https://raw.githubusercontent.com/aimenberhail-tech/amlaj-ai-bot/main/images/usage.png",
-  safe: "https://raw.githubusercontent.com/aimenberhail-tech/amlaj-ai-bot/main/images/safe.png",
   delivery: "https://raw.githubusercontent.com/aimenberhail-tech/amlaj-ai-bot/main/images/delivery.png"
 };
 
@@ -46,19 +45,47 @@ function wait(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
-function mainMenuReplies() {
+function getOfferEndDate() {
+  const date = new Date();
+  date.setDate(date.getDate() + 2);
+
+  const months = [
+    "جانفي", "فيفري", "مارس", "أفريل", "ماي", "جوان",
+    "جويلية", "أوت", "سبتمبر", "أكتوبر", "نوفمبر", "ديسمبر"
+  ];
+
+  return `${date.getDate()} ${months[date.getMonth()]}`;
+}
+
+function startButtons() {
   return [
-    { title: "😔 مشكلتي في الوجه", payload: "MENU_BENEFITS" },
-    { title: "🧴 طريقة الاستعمال", payload: "MENU_USAGE" },
-    { title: "⭐ النتائج", payload: "MENU_RESULTS" },
-    { title: "🌿 نوع البشرة", payload: "MENU_SAFE" },
+    { title: "😔 مشكل في الوجه", payload: "MENU_BENEFITS" },
     { title: "🚚 السعر والتوصيل", payload: "MENU_DELIVERY" },
+    { title: "🧴 طريقة الاستعمال", payload: "MENU_USAGE" },
     { title: "🛒 تأكيد الطلب", payload: "MENU_ORDER" }
   ];
 }
 
-function menuText() {
-  return "اختاري من الأزرار حنونة باش نعاونك بسرعة 🥰👇";
+function afterBenefitsButtons() {
+  return [
+    { title: "🛒 تأكيد الطلب", payload: "MENU_ORDER" },
+    { title: "🚚 السعر والتوصيل", payload: "MENU_DELIVERY" },
+    { title: "🧴 طريقة الاستعمال", payload: "MENU_USAGE" }
+  ];
+}
+
+function afterDeliveryButtons() {
+  return [
+    { title: "🛒 تأكيد الطلب", payload: "MENU_ORDER" },
+    { title: "🧴 طريقة الاستعمال", payload: "MENU_USAGE" }
+  ];
+}
+
+function afterUsageButtons() {
+  return [
+    { title: "🛒 تأكيد الطلب", payload: "MENU_ORDER" },
+    { title: "🚚 السعر والتوصيل", payload: "MENU_DELIVERY" }
+  ];
 }
 
 app.get("/", (req, res) => {
@@ -109,11 +136,31 @@ async function handleMessage(senderId, messageText, payload) {
 
   if (
     payload === "MENU_BENEFITS" ||
-    hasAny(msg, ["تجاعيد", "هالات", "تصبغات", "حبوب", "اثار", "آثار", "كلف", "مسام"])
+    hasAny(msg, ["مشكل", "مشكلتي", "الوجه", "تجاعيد", "هالات", "تصبغات", "حبوب", "اثار", "آثار", "كلف", "مسام"])
   ) {
     await sendImage(senderId, IMAGES.benefits);
+    await wait(900);
+    await sendImage(senderId, IMAGES.results);
     await wait(500);
-    await sendQuickReplies(senderId, menuText(), mainMenuReplies());
+    await sendQuickReplies(
+      senderId,
+      "إذا اقتنعتي حنونة تقدري تطلبي مباشرة 👇🥰",
+      afterBenefitsButtons()
+    );
+    return;
+  }
+
+  if (
+    payload === "MENU_DELIVERY" ||
+    hasAny(msg, ["توصيل", "التوصيل", "توصلو", "توصلولي", "الشحن", "livraison", "delivery"])
+  ) {
+    await sendImage(senderId, IMAGES.delivery);
+    await wait(500);
+    await sendQuickReplies(
+      senderId,
+      "التوصيل لباب المنزل حنونة 🚚🥰",
+      afterDeliveryButtons()
+    );
     return;
   }
 
@@ -123,45 +170,11 @@ async function handleMessage(senderId, messageText, payload) {
   ) {
     await sendImage(senderId, IMAGES.usage);
     await wait(500);
-    await sendQuickReplies(senderId, menuText(), mainMenuReplies());
-    return;
-  }
-
-  if (
-    payload === "MENU_RESULTS" ||
-    hasAny(msg, ["نتائج", "شهادات", "مجرب", "مضمون", "يفيد", "resultat", "efficace"])
-  ) {
-    await sendImage(senderId, IMAGES.results);
-    await wait(500);
-    await sendQuickReplies(senderId, menuText(), mainMenuReplies());
-    return;
-  }
-
-  if (
-    payload === "MENU_SAFE" ||
-    hasAny(msg, ["نوع البشرة", "اضرار", "أضرار", "حساسة", "بشرة حساسة", "safe"])
-  ) {
-    await sendImage(senderId, IMAGES.safe);
-    await wait(500);
-    await sendQuickReplies(senderId, menuText(), mainMenuReplies());
-    return;
-  }
-
-  if (
-    payload === "MENU_DELIVERY" ||
-    hasAny(msg, [
-      "توصيل",
-      "التوصيل",
-      "توصلو",
-      "توصلولي",
-      "الشحن",
-      "livraison",
-      "delivery"
-    ])
-  ) {
-    await sendImage(senderId, IMAGES.delivery);
-    await wait(500);
-    await sendQuickReplies(senderId, menuText(), mainMenuReplies());
+    await sendQuickReplies(
+      senderId,
+      "طريقة الاستعمال موضحة فوق حنونة 🥰👇",
+      afterUsageButtons()
+    );
     return;
   }
 
@@ -185,7 +198,19 @@ async function handleMessage(senderId, messageText, payload) {
 
   await sendImage(senderId, IMAGES.offer);
   await wait(500);
-  await sendQuickReplies(senderId, menuText(), mainMenuReplies());
+
+  await sendMessage(
+    senderId,
+    `🎁 عرض خاص على مجموعة اللبان الذكر العماني الأصلية\nالسعر 250 ألف فقط + صابون هدية مجانية 🎁\nالعرض صالح لغاية ${getOfferEndDate()} 🔥`
+  );
+
+  await wait(400);
+
+  await sendQuickReplies(
+    senderId,
+    "اختاري حنونة وش حابة تعرفي أكثر 👇🥰",
+    startButtons()
+  );
 }
 
 async function sendQuickReplies(senderId, text, replies) {
@@ -195,7 +220,7 @@ async function sendQuickReplies(senderId, text, replies) {
       recipient: { id: senderId },
       message: {
         text,
-        quick_replies: replies.slice(0, 13).map((r) => ({
+        quick_replies: replies.map((r) => ({
           content_type: "text",
           title: r.title,
           payload: r.payload
@@ -220,6 +245,16 @@ async function sendButtonMessage(senderId, text, buttons) {
           }
         }
       }
+    }
+  );
+}
+
+async function sendMessage(senderId, text) {
+  await axios.post(
+    `https://graph.facebook.com/v19.0/me/messages?access_token=${PAGE_ACCESS_TOKEN}`,
+    {
+      recipient: { id: senderId },
+      message: { text }
     }
   );
 }
