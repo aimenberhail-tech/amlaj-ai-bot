@@ -1,1 +1,439 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>زيت وبخاخ الأملج الأصلي CHALISSE</title>
 
+<style>
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f4f9ff;
+  color: #102033;
+  padding-bottom: 85px;
+}
+
+.container {
+  max-width: 520px;
+  margin: auto;
+  background: #ffffff;
+}
+
+.section-img {
+  width: 100%;
+  display: block;
+}
+
+.offer-img {
+  width: calc(100% - 20px);
+  margin: 15px auto;
+  display: block;
+  border-radius: 18px;
+  animation: pulse 1.8s infinite;
+  box-shadow: 0 10px 30px rgba(0, 98, 255, 0.25);
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.025); }
+  100% { transform: scale(1); }
+}
+
+.order-box {
+  margin: 18px 12px;
+  padding: 18px;
+  border-radius: 22px;
+  background: #ffffff;
+  border: 2px solid #0d6efd;
+  box-shadow: 0 10px 30px rgba(13,110,253,0.18);
+}
+
+.order-box h2 {
+  text-align: center;
+  color: #0d6efd;
+  margin-top: 0;
+  font-size: 24px;
+}
+
+label {
+  display: block;
+  margin-top: 13px;
+  margin-bottom: 6px;
+  color: #0d47a1;
+  font-weight: bold;
+}
+
+input, select {
+  width: 100%;
+  padding: 13px;
+  border-radius: 12px;
+  border: 1px solid #bcd7ff;
+  font-size: 16px;
+  box-sizing: border-box;
+  background: #f8fbff;
+}
+
+.products {
+  display: grid;
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.product-card {
+  border: 2px solid #d6e8ff;
+  border-radius: 16px;
+  padding: 14px;
+  background: #f8fbff;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.product-card.active {
+  border-color: #0d6efd;
+  background: #eaf3ff;
+  box-shadow: 0 6px 18px rgba(13,110,253,0.18);
+}
+
+.product-title {
+  font-weight: bold;
+  color: #0d47a1;
+  font-size: 17px;
+}
+
+.product-price {
+  color: #0d6efd;
+  font-size: 22px;
+  font-weight: bold;
+  margin-top: 6px;
+}
+
+.badge {
+  display: inline-block;
+  background: #ff7a00;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 20px;
+  font-size: 13px;
+  margin-bottom: 6px;
+}
+
+.delivery-options {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.delivery-card {
+  padding: 13px;
+  text-align: center;
+  border: 2px solid #d6e8ff;
+  border-radius: 14px;
+  background: #f8fbff;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.delivery-card.active {
+  border-color: #0d6efd;
+  background: #eaf3ff;
+}
+
+.delivery-card.disabled {
+  opacity: 0.45;
+  pointer-events: none;
+}
+
+.total {
+  margin-top: 18px;
+  padding: 15px;
+  border-radius: 16px;
+  background: #0d6efd;
+  color: white;
+  text-align: center;
+  line-height: 1.7;
+  font-weight: bold;
+  font-size: 17px;
+}
+
+button {
+  margin-top: 18px;
+  width: 100%;
+  padding: 16px;
+  background: #0d6efd;
+  color: white;
+  border: none;
+  border-radius: 16px;
+  font-size: 19px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.floating-btn {
+  position: fixed;
+  bottom: 12px;
+  left: 12px;
+  right: 12px;
+  max-width: 500px;
+  margin: auto;
+  background: #0d6efd;
+  color: white;
+  text-align: center;
+  padding: 15px;
+  border-radius: 18px;
+  font-weight: bold;
+  font-size: 18px;
+  z-index: 999;
+  text-decoration: none;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+  animation: pulse 1.7s infinite;
+}
+</style>
+</head>
+
+<body>
+
+<a href="#orderForm" class="floating-btn">🛒 اضغط هنا للطلب</a>
+
+<div class="container">
+
+  <img class="section-img" src="https://raw.githubusercontent.com/aimenberhail-tech/amlaj-ai-bot/main/images/amlaj-hero.png">
+  <img class="section-img" src="https://raw.githubusercontent.com/aimenberhail-tech/amlaj-ai-bot/main/images/amlaj-problems.png">
+  <img class="section-img" src="https://raw.githubusercontent.com/aimenberhail-tech/amlaj-ai-bot/main/images/amlaj-benefits.png">
+
+  <img class="offer-img" src="https://raw.githubusercontent.com/aimenberhail-tech/amlaj-ai-bot/main/images/amlaj-offers.png">
+
+  <img class="section-img" src="https://raw.githubusercontent.com/aimenberhail-tech/amlaj-ai-bot/main/images/amlaj-results.png">
+
+  <div class="order-box" id="orderForm">
+    <h2>🛒 تأكيد الطلب</h2>
+
+    <label>اختار العرض</label>
+
+    <div class="products">
+      <div class="product-card" onclick="selectProduct('زيت الأملج الأصلي', 1900, this)">
+        <div class="product-title">زيت الأملج الأصلي</div>
+        <div class="product-price">1900 دج</div>
+      </div>
+
+      <div class="product-card" onclick="selectProduct('بخاخ الأملج الأصلي', 1700, this)">
+        <div class="product-title">بخاخ الأملج الأصلي</div>
+        <div class="product-price">1700 دج</div>
+      </div>
+
+      <div class="product-card active" onclick="selectProduct('العرض الكامل: زيت + بخاخ', 2900, this)">
+        <span class="badge">🔥 الأكثر طلباً</span>
+        <div class="product-title">زيت + بخاخ الأملج الأصلي</div>
+        <div class="product-price">2900 دج</div>
+      </div>
+    </div>
+
+    <label>الاسم واللقب</label>
+    <input id="name" type="text" placeholder="اكتب الاسم واللقب">
+
+    <label>رقم الهاتف</label>
+    <input id="phone" type="tel" placeholder="05xxxxxxxx">
+
+    <label>الولاية</label>
+    <select id="wilaya" onchange="updateTotal()">
+      <option value="">اختار الولاية</option>
+    </select>
+
+    <label>البلدية</label>
+    <input id="commune" type="text" placeholder="اكتب البلدية">
+
+    <label>نوع التوصيل</label>
+    <div class="delivery-options">
+      <div id="bureauCard" class="delivery-card active" onclick="selectDelivery('bureau')">🏢 مكتب</div>
+      <div id="homeCard" class="delivery-card" onclick="selectDelivery('home')">🏠 للمنزل</div>
+    </div>
+
+    <div class="total" id="totalBox">
+      اختار الولاية لظهور السعر النهائي
+    </div>
+
+    <button id="submitBtn" onclick="submitOrder()">✅ تأكيد الطلب</button>
+  </div>
+
+  <img class="section-img" src="https://raw.githubusercontent.com/aimenberhail-tech/amlaj-ai-bot/main/images/amlaj-order-steps.png">
+
+</div>
+
+<script>
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyLpWhYdH9w8WV4xg2CmWGmpriYkkw1EKwt6Y7b1Wm0kt3IcZwr9Wy-aKZ9etlJuORd/exec";
+
+let selectedProduct = "العرض الكامل: زيت + بخاخ";
+let selectedProductPrice = 2900;
+let selectedDeliveryType = "bureau";
+
+const deliveryPrices = {
+  "الجزائر": { home: 400, bureau: 300 },
+  "قالمة": { home: 700, bureau: 450 },
+  "الشلف": { home: 700, bureau: 450 },
+  "تمنراست": { home: 1700, bureau: 1100 },
+  "وهران": { home: 600, bureau: 450 },
+  "معسكر": { home: 600, bureau: 450 },
+  "سطيف": { home: 600, bureau: 450 },
+  "البويرة": { home: 600, bureau: 450 },
+  "الأغواط": { home: 900, bureau: 600 },
+  "المدية": { home: 600, bureau: 450 },
+  "ورقلة": { home: 900, bureau: 600 },
+  "بشار": { home: 1000, bureau: 700 },
+  "قسنطينة": { home: 600, bureau: 450 },
+  "سوق أهراس": { home: 700, bureau: 450 },
+  "تقرت": { home: 900, bureau: null },
+  "المنيعة": { home: 950, bureau: null },
+  "البيض": { home: 1000, bureau: null },
+  "برج بوعريريج": { home: 600, bureau: null },
+  "أولاد جلال": { home: 900, bureau: null },
+  "خنشلة": { home: 900, bureau: null },
+  "غرداية": { home: 900, bureau: 600 },
+  "سعيدة": { home: 700, bureau: null },
+  "البليدة": { home: 600, bureau: 450 },
+  "أدرار": { home: 1200, bureau: 800 },
+  "مستغانم": { home: 600, bureau: 450 },
+  "باتنة": { home: 700, bureau: 450 },
+  "بسكرة": { home: 900, bureau: 600 },
+  "تبسة": { home: 800, bureau: 450 },
+  "تيارت": { home: 700, bureau: 450 },
+  "أم البواقي": { home: 700, bureau: 450 },
+  "الجلفة": { home: 900, bureau: 600 },
+  "جيجل": { home: 700, bureau: 450 },
+  "بجاية": { home: 600, bureau: 450 },
+  "سكيكدة": { home: 600, bureau: 450 },
+  "عنابة": { home: 700, bureau: 450 },
+  "المسيلة": { home: 900, bureau: 600 },
+  "بومرداس": { home: 600, bureau: 450 },
+  "الوادي": { home: 900, bureau: 600 },
+  "تيسمسيلت": { home: 700, bureau: 450 },
+  "الطارف": { home: 750, bureau: null },
+  "تيبازة": { home: 600, bureau: 450 },
+  "غليزان": { home: 700, bureau: 450 },
+  "عين الدفلى": { home: 600, bureau: 450 },
+  "النعامة": { home: 1000, bureau: null },
+  "عين تموشنت": { home: 700, bureau: null },
+  "بني عباس": { home: 1100, bureau: null },
+  "عين صالح": { home: 1500, bureau: null },
+  "ميلة": { home: 600, bureau: 450 },
+  "تلمسان": { home: 700, bureau: 450 },
+  "تيزي وزو": { home: 600, bureau: 450 },
+  "سيدي بلعباس": { home: 600, bureau: 450 },
+  "تندوف": { home: 1700, bureau: 1200 }
+};
+
+const wilayaSelect = document.getElementById("wilaya");
+
+Object.keys(deliveryPrices).forEach(w => {
+  const option = document.createElement("option");
+  option.value = w;
+  option.textContent = w;
+  wilayaSelect.appendChild(option);
+});
+
+function selectProduct(name, price, element) {
+  selectedProduct = name;
+  selectedProductPrice = price;
+
+  document.querySelectorAll(".product-card").forEach(card => {
+    card.classList.remove("active");
+  });
+
+  element.classList.add("active");
+  updateTotal();
+}
+
+function selectDelivery(type) {
+  selectedDeliveryType = type;
+
+  document.getElementById("bureauCard").classList.remove("active");
+  document.getElementById("homeCard").classList.remove("active");
+
+  if (type === "bureau") {
+    document.getElementById("bureauCard").classList.add("active");
+  } else {
+    document.getElementById("homeCard").classList.add("active");
+  }
+
+  updateTotal();
+}
+
+function updateTotal() {
+  const wilaya = document.getElementById("wilaya").value;
+  const totalBox = document.getElementById("totalBox");
+  const bureauCard = document.getElementById("bureauCard");
+
+  if (!wilaya) {
+    totalBox.textContent = "اختار الولاية لظهور السعر النهائي";
+    return;
+  }
+
+  const prices = deliveryPrices[wilaya];
+
+  if (prices.bureau === null) {
+    bureauCard.classList.add("disabled");
+
+    if (selectedDeliveryType === "bureau") {
+      selectedDeliveryType = "home";
+      document.getElementById("bureauCard").classList.remove("active");
+      document.getElementById("homeCard").classList.add("active");
+    }
+  } else {
+    bureauCard.classList.remove("disabled");
+  }
+
+  const delivery = selectedDeliveryType === "bureau" ? prices.bureau : prices.home;
+  const total = selectedProductPrice + delivery;
+
+  totalBox.innerHTML =
+    "سعر المنتج: " + selectedProductPrice + " دج<br>" +
+    "سعر التوصيل: " + delivery + " دج<br>" +
+    "المجموع النهائي: " + total + " دج";
+}
+
+function submitOrder() {
+  const name = document.getElementById("name").value.trim();
+  const phone = document.getElementById("phone").value.trim();
+  const wilaya = document.getElementById("wilaya").value;
+  const commune = document.getElementById("commune").value.trim();
+  const btn = document.getElementById("submitBtn");
+
+  if (!name || !phone || !wilaya || !commune) {
+    alert("كمّل المعلومات من فضلك");
+    return;
+  }
+
+  const prices = deliveryPrices[wilaya];
+  const delivery = selectedDeliveryType === "bureau" ? prices.bureau : prices.home;
+  const total = selectedProductPrice + delivery;
+
+  const formData = new FormData();
+  formData.append("product", selectedProduct);
+  formData.append("name", name);
+  formData.append("phone", phone);
+  formData.append("wilaya", wilaya);
+  formData.append("commune", commune);
+  formData.append("deliveryType", selectedDeliveryType === "bureau" ? "مكتب" : "منزل");
+  formData.append("delivery", delivery);
+  formData.append("total", total);
+
+  btn.disabled = true;
+  btn.textContent = "جاري إرسال الطلب...";
+
+  fetch(SCRIPT_URL, {
+    method: "POST",
+    body: formData
+  })
+  .then(response => response.text())
+  .then(orderId => {
+    window.location.href = "/thankyou.html?order=" + encodeURIComponent(orderId);
+  })
+  .catch(() => {
+    alert("صار مشكل في الإرسال، جرب مرة أخرى");
+    btn.disabled = false;
+    btn.textContent = "✅ تأكيد الطلب";
+  });
+}
+</script>
+
+</body>
+</html>
