@@ -321,7 +321,7 @@ function submitOrder() {
     method: "POST",
     body: formData
   }).then(() => {
-    document.getElementById("successMsg").style.display = "block";
+    window.location.href = "/thankyou.html";
     btn.textContent = "✅ تم إرسال الطلب";
   }).catch(() => {
     alert("صار مشكل في الإرسال، جربي مرة أخرى");
