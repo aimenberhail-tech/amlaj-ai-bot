@@ -3,37 +3,55 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>مجموعة اللبان الذكر العماني</title>
+  <title>تأكيد الطلب</title>
   <style>
     body {
       margin: 0;
       font-family: Arial, sans-serif;
       background: #050505;
       color: #fff;
+      padding-bottom: 80px;
     }
+
     .container {
       max-width: 520px;
       margin: auto;
-      padding-bottom: 30px;
     }
-    img {
-      width: 100%;
-      display: block;
-      margin: 0 auto 10px;
-      border-radius: 8px;
+
+    .intro {
+      text-align: center;
+      padding: 14px;
+      background: #111;
+      border-bottom: 1px solid #d4af37;
     }
+
+    .intro h1 {
+      color: #d4af37;
+      font-size: 22px;
+      margin: 8px 0;
+    }
+
+    .intro p {
+      margin: 6px 0;
+      line-height: 1.7;
+      font-size: 15px;
+    }
+
     .order-box {
       margin: 15px;
       background: #151515;
       border: 2px solid #d4af37;
       border-radius: 18px;
       padding: 18px;
+      box-shadow: 0 0 18px rgba(212, 175, 55, 0.25);
     }
+
     h2 {
       color: #d4af37;
       text-align: center;
       margin-top: 0;
     }
+
     .price {
       background: #d4af37;
       color: #111;
@@ -42,13 +60,17 @@
       padding: 12px;
       border-radius: 12px;
       margin-bottom: 15px;
+      line-height: 1.7;
     }
+
     label {
       color: #f5d76e;
       display: block;
       margin-top: 12px;
       margin-bottom: 6px;
+      font-weight: bold;
     }
+
     input, select {
       width: 100%;
       padding: 13px;
@@ -57,6 +79,7 @@
       font-size: 16px;
       box-sizing: border-box;
     }
+
     .total {
       margin-top: 15px;
       padding: 14px;
@@ -67,6 +90,7 @@
       font-weight: bold;
       line-height: 1.6;
     }
+
     button {
       margin-top: 18px;
       width: 100%;
@@ -77,7 +101,9 @@
       border-radius: 12px;
       font-size: 18px;
       font-weight: bold;
+      cursor: pointer;
     }
+
     .success {
       display: none;
       text-align: center;
@@ -86,25 +112,70 @@
       font-weight: bold;
       line-height: 1.8;
     }
+
+    .section-title {
+      text-align: center;
+      color: #d4af37;
+      margin: 20px 10px 10px;
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    .landing-img {
+      width: calc(100% - 20px);
+      display: block;
+      margin: 10px auto;
+      border-radius: 10px;
+      border: 1px solid #333;
+      cursor: pointer;
+    }
+
+    .hint {
+      text-align: center;
+      color: #f5d76e;
+      font-size: 14px;
+      margin-bottom: 8px;
+    }
+
+    .floating-btn {
+      position: fixed;
+      bottom: 12px;
+      left: 12px;
+      right: 12px;
+      max-width: 500px;
+      margin: auto;
+      background: #d4af37;
+      color: #111;
+      text-align: center;
+      padding: 15px;
+      border-radius: 14px;
+      font-weight: bold;
+      font-size: 18px;
+      z-index: 999;
+      box-shadow: 0 0 18px rgba(0,0,0,0.7);
+      text-decoration: none;
+    }
   </style>
 </head>
+
 <body>
+
+<a href="#orderForm" class="floating-btn">🛒 اضغطي هنا لتأكيد الطلب</a>
 
 <div class="container">
 
-  <img src="https://raw.githubusercontent.com/aimenberhail-tech/amlaj-ai-bot/main/images/offer.png">
-  <img src="https://raw.githubusercontent.com/aimenberhail-tech/amlaj-ai-bot/main/images/benefits.png">
-  <img src="https://raw.githubusercontent.com/aimenberhail-tech/amlaj-ai-bot/main/images/results.png">
-  <img src="https://raw.githubusercontent.com/aimenberhail-tech/amlaj-ai-bot/main/images/usage.png">
-  <img src="https://raw.githubusercontent.com/aimenberhail-tech/amlaj-ai-bot/main/images/safe.png">
-  <img src="https://raw.githubusercontent.com/aimenberhail-tech/amlaj-ai-bot/main/images/delivery.png">
+  <div class="intro">
+    <h1>مجموعة اللبان الذكر العماني الأصلية</h1>
+    <p>عمّري معلوماتك هنا حنونة، وبعدها يتصل بك فريقنا لتأكيد الطلب 🥰</p>
+    <p>الدفع يكون عند الاستلام بعد ما تشوفي المنتج 🚚</p>
+  </div>
 
-  <div class="order-box">
+  <div class="order-box" id="orderForm">
     <h2>🛒 تأكيد الطلب</h2>
 
     <div class="price">
-      مجموعة اللبان الذكر العماني الأصلية<br>
-      السعر: 250 ألف فقط
+      السعر: 250 ألف فقط<br>
+      + صابون هدية مجانية 🎁
     </div>
 
     <label>الاسم</label>
@@ -132,6 +203,16 @@
       سيتصل بك فريقنا لتأكيد الطلب 🥰
     </div>
   </div>
+
+  <div class="section-title">كل التفاصيل على المنتج 👇</div>
+  <div class="hint">اضغطي على أي صورة للرجوع إلى الاستمارة</div>
+
+  <img class="landing-img" onclick="goToForm()" src="https://raw.githubusercontent.com/aimenberhail-tech/amlaj-ai-bot/main/images/offer.png">
+  <img class="landing-img" onclick="goToForm()" src="https://raw.githubusercontent.com/aimenberhail-tech/amlaj-ai-bot/main/images/benefits.png">
+  <img class="landing-img" onclick="goToForm()" src="https://raw.githubusercontent.com/aimenberhail-tech/amlaj-ai-bot/main/images/results.png">
+  <img class="landing-img" onclick="goToForm()" src="https://raw.githubusercontent.com/aimenberhail-tech/amlaj-ai-bot/main/images/usage.png">
+  <img class="landing-img" onclick="goToForm()" src="https://raw.githubusercontent.com/aimenberhail-tech/amlaj-ai-bot/main/images/safe.png">
+  <img class="landing-img" onclick="goToForm()" src="https://raw.githubusercontent.com/aimenberhail-tech/amlaj-ai-bot/main/images/delivery.png">
 
 </div>
 
@@ -191,6 +272,13 @@ function updateTotal() {
   const total = PRODUCT_PRICE + delivery;
 
   box.innerHTML = `التوصيل لباب المنزل: ${delivery} دج<br>المجموع: ${total} دج`;
+}
+
+function goToForm() {
+  document.getElementById("orderForm").scrollIntoView({
+    behavior: "smooth",
+    block: "start"
+  });
 }
 
 function submitOrder() {
