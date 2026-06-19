@@ -254,6 +254,22 @@ const farSouth = [
 ];
 
 const select = document.getElementById("wilaya");
+  let formStarted = false;
+
+["name", "phone", "commune"].forEach(id => {
+  document.getElementById(id).addEventListener("input", () => {
+    if (!formStarted) {
+      formStarted = true;
+
+      if (typeof gtag === "function") {
+        gtag("event", "form_started", {
+          event_category: "lead",
+          event_label: "order_form"
+        });
+      }
+    }
+  });
+});
 
 wilayas.forEach(w => {
   const option = document.createElement("option");
